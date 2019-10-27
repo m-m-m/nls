@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.m-m-m</groupId>
+    <artifactId>mmm</artifactId>
+    <version>2.8.0</version>
+    <relativePath>../parent/pom.xml</relativePath>
+  </parent>
+  <artifactId>mmm-nls-parent</artifactId>
+  <version>${revision}${changelist}</version>
+  <packaging>pom</packaging>
+  <name>${project.artifactId}</name>
+  <description>Advanced Native Language Support (NLS).</description>
+
+  <properties>
+    <revision>1.0.0</revision>
+    <changelist>-SNAPSHOT</changelist>
+    <mmm.repository>nls</mmm.repository>
+  </properties>
+
+  <modules>
+    <module>core</module>
+  </modules>
+
+  <dependencies>
+    <!-- Test -->
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.3.0-alpha5</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>
