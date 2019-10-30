@@ -44,7 +44,8 @@ public class NlsMessageTest extends Assertions implements NlsArgumentsKeys {
     String variable = "'{" + key + "}'";
     final String msg = welcome + variable + suffix;
     final String msgDe = welcomeDe + variable + suffix;
-    NlsMessage testMessage = NlsMessageFactory.get().create(NlsBundleTest.BUNDLE, "msgWelcome", msg, NlsArguments.ofName(name));
+    NlsMessage testMessage = NlsMessageFactory.get().create(NlsBundleTest.BUNDLE, "msgWelcome", msg,
+        NlsArguments.ofName(name));
     assertThat(testMessage.getInternationalizedMessage()).isEqualTo(msg);
     assertThat(testMessage.getArguments().get(key)).isEqualTo(name);
     assertThat(testMessage.getMessage()).isEqualTo(welcome + value + suffix);
@@ -53,49 +54,22 @@ public class NlsMessageTest extends Assertions implements NlsArgumentsKeys {
     assertThat(testMessage.getLocalizedMessage(Locale.JAPANESE)).isEqualTo(testMessage.getMessage());
   }
 
-  // @Test
-  // public void testCascadedMessage() {
-  //
-  // final String integer = "integer";
-  // final String integerDe = "Ganze Zahl";
-  // String keyMin = "min";
-  // String keyMax = "max";
-  // final String real = "real[{" + keyMin + "},{" + keyMax + "}]";
-  // final String realDe = "relle Zahl[{" + keyMin + "},{" + keyMax + "}]";
-  // NlsMessageFactory factory = getMessageFactory();
-  // NlsMessage simpleMessageInteger = factory.create(BUNDLE, "dummy-key", integer);
-  // NlsMessage simpleMessageReal = factory.create(BUNDLE, "dummy-key", real, keyMin, Double.valueOf(-5), keyMax,
-  // Double.valueOf(5));
-  //
-  // String keyExpected = "expectedType";
-  // String keyActual = "actualType";
-  // final String err = "The given value must be of the type \"{" + keyExpected + "}\" but has the type \"{" + keyActual
-  // + "}\"!";
-  // final String errDe = "Der angegebene Wert muss vom Typ \"{" + keyExpected + "}\" sein, hat aber den Typ \"{"
-  // + keyActual + "}\"!";
-  // NlsMessage cascadedMessage = factory.create(BUNDLE, "dummy-key", err, keyExpected, simpleMessageInteger, keyActual,
-  // simpleMessageReal);
-  // AbstractNlsTemplateResolver translatorDe = new AbstractNlsTemplateResolver() {
-  //
-  // @Override
-  // public NlsTemplate resolveTemplate(String internationalizedMessage) {
-  //
-  // if (internationalizedMessage.equals(integer)) {
-  // return new GermanTemplate(integerDe);
-  // } else if (internationalizedMessage.equals(real)) {
-  // return new GermanTemplate(realDe);
-  // } else if (internationalizedMessage.equals(err)) {
-  // return new GermanTemplate(errDe);
-  // }
-  // return null;
-  // }
-  //
-  // };
-  // translatorDe.initialize();
-  // String msgDe = cascadedMessage.getLocalizedMessage(Locale.GERMAN, translatorDe);
-  // assertThat(msgDe)
-  // .isEqualTo("Der angegebene Wert muss vom Typ \"Ganze Zahl\" sein, hat aber den Typ \"relle Zahl[-5,5]\"!");
-  // }
+  @Test
+  public void testCascadedMessage() {
+
+    NlsMessageFactory factory = NlsMessageFactory.get();
+    NlsMessage msgInteger = factory.create(NlsBundleTest.BUNDLE, "msgInteger", "integer");
+    NlsMessage msgReal = factory.create(NlsBundleTest.BUNDLE, "msgRealRange", "real[{min},{max}]",
+        NlsArguments.ofMinMax(Double.valueOf(-5), Double.valueOf(5)));
+
+    NlsMessage cascadedMessage = factory.create(NlsBundleTest.BUNDLE, "errValueInvalidType",
+        "The given value must be of the type '{expected}' but has the type '{actual}'!",
+        NlsArguments.of("expected", msgInteger, "actual", msgReal));
+    assertThat(cascadedMessage.getMessage())
+        .isEqualTo("The given value must be of the type 'integer' but has the type 'real[-5,5]'!");
+    assertThat(cascadedMessage.getLocalizedMessage(Locale.GERMAN))
+        .isEqualTo("Der angegebene Wert muss vom Typ 'Ganze Zahl' sein, hat aber den Typ 'relle Zahl[-5,5]'!");
+  }
   //
   // @Test
   // public void testMessageWithEnumTranslation() {
@@ -145,8 +119,8 @@ public class NlsMessageTest extends Assertions implements NlsArgumentsKeys {
 
     OffsetDateTime offsetDateTime = OffsetDateTime.parse("1999-12-31T23:59:59+01:00");
     Date date = Date.from(offsetDateTime.toInstant());
-    NlsMessage msg = NlsMessageFactory.get().create(NlsBundleTest.BUNDLE, "non-existent-key", "{date,date,yyyyMMdd_HHmmss}",
-        NlsArguments.ofDate(date));
+    NlsMessage msg = NlsMessageFactory.get().create(NlsBundleTest.BUNDLE, "non-existent-key",
+        "{date,date,yyyyMMdd_HHmmss}", NlsArguments.ofDate(date));
     assertThat(msg.getMessage()).isEqualTo("19991231_235959");
   }
 
@@ -278,7 +252,8 @@ public class NlsMessageTest extends Assertions implements NlsArgumentsKeys {
     message = "{value,choice,(?==true)'foo'(else){" + key2 + ",choice,(?==true)'bar'(else){" + key3 + "}}}";
     msg = factory.create(NlsBundleTest.BUNDLE, "dummy-key", message, NlsArguments.ofValue(Boolean.TRUE));
     assertThat(msg.getMessage()).isEqualTo("foo");
-    msg = factory.create(NlsBundleTest.BUNDLE, "dummy-key", message, NlsArguments.of(KEY_VALUE, Boolean.FALSE, key2, Boolean.TRUE));
+    msg = factory.create(NlsBundleTest.BUNDLE, "dummy-key", message,
+        NlsArguments.of(KEY_VALUE, Boolean.FALSE, key2, Boolean.TRUE));
     assertThat(msg.getMessage()).isEqualTo("bar");
     msg = factory.create(NlsBundleTest.BUNDLE, "dummy-key", message,
         NlsArguments.of(KEY_VALUE, Boolean.FALSE, key2, Boolean.FALSE, key3, key3));

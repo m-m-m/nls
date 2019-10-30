@@ -9,6 +9,7 @@ import java.util.Map.Entry;
 import net.sf.mmm.nls.argument.impl.NlsArgumentsDouble;
 import net.sf.mmm.nls.argument.impl.NlsArgumentsKeyValue;
 import net.sf.mmm.nls.argument.impl.NlsArgumentsMap;
+import net.sf.mmm.nls.argument.impl.NlsArgumentsMinMax;
 import net.sf.mmm.nls.argument.impl.NlsArgumentsNone;
 import net.sf.mmm.nls.argument.impl.NlsArgumentsSingle;
 
@@ -202,6 +203,16 @@ public interface NlsArguments extends NlsArgumentsKeys {
   public static NlsArguments ofKeyValue(Object key, Object value) {
 
     return new NlsArgumentsKeyValue(key, value);
+  }
+
+  /**
+   * @param min the {@link #get(String) value} for {@link #KEY_MIN}.
+   * @param max the {@link #get(String) value} for {@link #KEY_MAX}.
+   * @return an instance of {@link NlsArguments} containing the single specified arguments.
+   */
+  public static NlsArguments ofMinMax(Object min, Object max) {
+
+    return new NlsArgumentsMinMax(min, max);
   }
 
 }
