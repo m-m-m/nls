@@ -1,14 +1,24 @@
-= Mature Modular Meta-framework (mmm)
+image:https://raw.github.com/m-m-m/mmm/master/src/site/resources/images/logo.png[logo,link="https://m-m-m.github.io"]
 
-image:https://raw.github.com/m-m-m/mmm/master/src/site/resources/images/logo.png[logo]
-
-*Welcome to the wonderful world of http://m-m-m.sourceforge.net/index.html[mmm]*
-
-== mmm-nls
+= mmm-nls
 
 image:https://travis-ci.org/m-m-m/nls.svg?branch=develop["build-status",link="https://travis-ci.org/m-m-m/nls"]
 
 The module `mmm-nls` provides advanced native-language-support.
 
-* https://m-m-m.github.io/maven/apidocs/net/sf/mmm/nls/package-summary.html#package.description[NLS API]
-* https://m-m-m.github.io/maven/apidocs/[and much more... ]
+== Usage
+
+Want to give it a try?
+
+Maven Dependency:
+```xml
+<dependency>
+  <groupId>io.github.m-m-m</groupId>
+  <artifactId>mmm-nls</artifactId>
+</dependency>
+```
+
+Module Dependency:
+```java
+  requires transitive io.github.mmm.nls;
+```
