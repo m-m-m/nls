@@ -36,4 +36,10 @@ public class NlsArgumentsNone implements NlsArguments {
     return null;
   }
 
+  @Override
+  public NlsArguments with(String key, Object value) {
+
+    return NlsArguments.of(key, value);
+  }
+
 }

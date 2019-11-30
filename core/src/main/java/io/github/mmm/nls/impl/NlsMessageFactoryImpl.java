@@ -5,7 +5,7 @@ package io.github.mmm.nls.impl;
 import io.github.mmm.nls.NlsMessage;
 import io.github.mmm.nls.NlsMessageFactory;
 import io.github.mmm.nls.argument.NlsArguments;
-import io.github.mmm.nls.template.NlsTemplate;
+import io.github.mmm.nls.template.impl.NlsTemplateImpl;
 import io.github.mmm.nls.template.impl.NlsTemplateImplWithMessage;
 
 /**
@@ -17,17 +17,11 @@ public class NlsMessageFactoryImpl implements NlsMessageFactory {
   public static final NlsMessageFactoryImpl INSTANCE = new NlsMessageFactoryImpl();
 
   @Override
-  public NlsMessage create(NlsTemplate template, NlsArguments arguments) {
-
-    return new NlsMessageImpl(template, null, arguments);
-  }
-
-  @Override
   public NlsMessage create(String bundleName, String messageKey, String internationalizedMessage,
       NlsArguments arguments) {
 
-    NlsTemplate template = new NlsTemplateImplWithMessage(bundleName, messageKey, internationalizedMessage);
-    return create(template, arguments);
+    NlsTemplateImpl template = new NlsTemplateImplWithMessage(bundleName, messageKey, internationalizedMessage);
+    return new NlsMessageImpl(template, internationalizedMessage, arguments);
   }
 
 }

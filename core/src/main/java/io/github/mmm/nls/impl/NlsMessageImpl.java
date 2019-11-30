@@ -7,15 +7,17 @@ import java.util.Locale;
 
 import io.github.mmm.base.exception.RuntimeIoException;
 import io.github.mmm.nls.argument.NlsArguments;
+import io.github.mmm.nls.descriptor.NlsMessageDescriptor;
 import io.github.mmm.nls.formatter.impl.NlsMessageFormatterImpl;
 import io.github.mmm.nls.template.NlsTemplate;
+import io.github.mmm.nls.template.impl.NlsTemplateImpl;
 
 /**
  * Implementation of {@link io.github.mmm.nls.NlsMessage}.
  */
 public class NlsMessageImpl extends AbstractNlsMessage {
 
-  private NlsTemplate template;
+  private NlsTemplateImpl template;
 
   private String internationalizedMessage;
 
@@ -24,11 +26,11 @@ public class NlsMessageImpl extends AbstractNlsMessage {
   /**
    * The constructor.
    *
-   * @param template is the {@link NlsTemplate}.
+   * @param template is the {@link NlsTemplateImpl}.
    * @param internationalizedMessage the {@link #getInternationalizedMessage() internationalized message}
    * @param arguments are the {@link NlsArguments} filled into the message after nationalization.
    */
-  public NlsMessageImpl(NlsTemplate template, String internationalizedMessage, NlsArguments arguments) {
+  public NlsMessageImpl(NlsTemplateImpl template, String internationalizedMessage, NlsArguments arguments) {
 
     this.template = template;
     this.internationalizedMessage = internationalizedMessage;
@@ -58,6 +60,12 @@ public class NlsMessageImpl extends AbstractNlsMessage {
    * @return the {@link NlsTemplate} of this message.
    */
   public NlsTemplate getTemplate() {
+
+    return this.template;
+  }
+
+  @Override
+  public NlsMessageDescriptor getDescriptor() {
 
     return this.template;
   }

@@ -4,7 +4,9 @@ package io.github.mmm.nls;
 
 import java.util.Locale;
 
+import io.github.mmm.base.i18n.Localizable;
 import io.github.mmm.nls.argument.NlsArguments;
+import io.github.mmm.nls.descriptor.NlsMessageDescriptor;
 import io.github.mmm.nls.variable.NlsVariable;
 
 /**
@@ -30,7 +32,7 @@ import io.github.mmm.nls.variable.NlsVariable;
  * @see NlsMessageFactory
  * @see io.github.mmm.nls
  */
-public interface NlsMessage extends NlsObject {
+public interface NlsMessage extends Localizable {
 
   /**
    * The prefix appended to the {@link #getInternationalizedMessage() message} if the localization (translation) failed.
@@ -50,13 +52,10 @@ public interface NlsMessage extends NlsObject {
   String getInternationalizedMessage();
 
   /**
-   * This method gets the language independent argument value for the given {@code key}.
-   *
-   * @param key is the name of the requested argument.
-   * @return the argument value for the given key or {@code null} if NOT defined.
    * @see io.github.mmm.nls.argument.NlsArguments#get(String)
    * @see io.github.mmm.nls.variable.NlsVariable
    */
+  @Override
   default Object getArgument(String key) {
 
     return getArguments().get(key);
@@ -70,38 +69,12 @@ public interface NlsMessage extends NlsObject {
   NlsArguments getArguments();
 
   /**
-   * <b>ATTENTION:</b><br>
-   * In most cases you wand to use {@link #getLocalizedMessage(Locale)} instead of this method.
-   *
-   * @return the {@link #getInternationalizedMessage() untranslated message} with arguments filled in. This results in
-   *         the message in its original language that should typically be English.
-   * @see #getLocalizedMessage()
-   */
-  default String getMessage() {
-
-    return getLocalizedMessage(Locale.ROOT);
-  }
-
-  /**
-   * This method tries to get the {@link #getLocalizedMessage(Locale) localized message} as {@link String} using the
-   * {@link Locale#getDefault() default locale}. <b>ATTENTION:</b><br>
-   * If possible try to avoid using this method and use {@link #getLocalizedMessage(Locale)} instead (e.g. using spring
-   * {@code LocaleContextHolder} to get the users locale).
-   *
-   * @return the localized message.
-   */
-  default String getLocalizedMessage() {
-
-    return getLocalizedMessage(Locale.getDefault());
-  }
-
-  /**
    * This method gets the resolved and localized message.<br>
    * First it will translate the {@link #getInternationalizedMessage() internationalized message} to the given
    * {@link Locale}. If this fails for whatever reason, the {@link #getInternationalizedMessage() internationalized
    * message} is used as fallback.<br>
-   * Then this message gets resolved by replacing the {@link io.github.mmm.nls.variable.NlsVariable variables} with their
-   * according {@link #getArguments() arguments}.<br>
+   * Then this message gets resolved by replacing the {@link io.github.mmm.nls.variable.NlsVariable variables} with
+   * their according {@link #getArguments() arguments}.<br>
    * <b>Example:</b><br>
    * We assume the {@link #getInternationalizedMessage() internationalized message} is <code>"Welcome {name}!"</code>
    * and the {@link #getArguments() argument} with the {@link NlsArguments#getKey(int) key} {@code "name"} has the
@@ -111,10 +84,8 @@ public interface NlsMessage extends NlsObject {
    * resulting in {@code "Welcome Joelle!"}.
    *
    * @see io.github.mmm.nls
-   *
-   * @param locale is the locale to translate to.
-   * @return the localized message.
    */
+  @Override
   default String getLocalizedMessage(Locale locale) {
 
     StringBuilder result = new StringBuilder();
@@ -123,19 +94,8 @@ public interface NlsMessage extends NlsObject {
   }
 
   /**
-   * This method writes the {@link #getLocalizedMessage(Locale) localized message} to the given {@code buffer}. <br>
-   *
-   * @see #getLocalizedMessage(Locale)
-   *
-   * @param locale is the locale to translate to.
-   * @param buffer is the buffer where to write the message to.
+   * @return the {@link NlsMessageDescriptor}.
    */
-  void getLocalizedMessage(Locale locale, Appendable buffer);
-
-  @Override
-  default NlsMessage toNlsMessage() {
-
-    return this;
-  }
+  NlsMessageDescriptor getDescriptor();
 
 }

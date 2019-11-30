@@ -8,10 +8,11 @@ import java.text.NumberFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import io.github.mmm.base.i18n.Localizable;
+import io.github.mmm.base.i18n.LocalizableObject;
 import io.github.mmm.nls.NlsBundle;
 import io.github.mmm.nls.NlsMessage;
 import io.github.mmm.nls.NlsMessageFactory;
-import io.github.mmm.nls.NlsObject;
 import io.github.mmm.nls.argument.NlsArguments;
 
 /**
@@ -29,8 +30,8 @@ public class NlsFormatterPluginDefault extends AbstractNlsFormatterPlugin {
       } else if (object instanceof Date) {
         DateFormat format = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.LONG, locale);
         result = format.format(object);
-      } else if (object instanceof NlsObject) {
-        NlsMessage message = ((NlsObject) object).toNlsMessage();
+      } else if (object instanceof LocalizableObject) {
+        Localizable message = ((LocalizableObject) object).toLocalizable();
         if (message != null) {
           message.getLocalizedMessage(locale, buffer);
           return;

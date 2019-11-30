@@ -6,7 +6,6 @@ import java.util.Locale;
 
 import io.github.mmm.base.justification.Justification;
 import io.github.mmm.nls.NlsMessage;
-import io.github.mmm.nls.NlsObject;
 import io.github.mmm.nls.argument.NlsArguments;
 import io.github.mmm.nls.formatter.NlsFormatterManager;
 import io.github.mmm.nls.formatter.NlsFormatterPlugin;
@@ -17,8 +16,8 @@ import io.github.mmm.nls.formatter.impl.plugin.NlsFormatterPluginDefault;
  * argument is a place-holder for a dynamic parameter filled into the message. It is resolved when the message is
  * finally {@link NlsMessage#getLocalizedMessage(java.util.Locale) localized} as {@link String} for a specific
  * {@link java.util.Locale}. The {@link #getKey() key} is used to {@link NlsMessage#getArgument(String) lookup} the
- * argument value to fill in. If that value itself implements {@link NlsObject} it will be also translated using the
- * same {@link Locale}.<br>
+ * argument value to fill in. If that value itself implements {@link io.github.mmm.base.i18n.LocalizableObject} it will
+ * be also translated using the same {@link Locale}.<br>
  * The syntax for an {@link NlsVariable} in an {@link NlsMessage#getInternationalizedMessage() i18n message} is
  * specified as following:
  *

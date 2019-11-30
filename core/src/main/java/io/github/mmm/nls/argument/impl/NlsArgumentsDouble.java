@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package io.github.mmm.nls.argument.impl;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import io.github.mmm.nls.argument.NlsArguments;
@@ -60,6 +62,17 @@ public class NlsArgumentsDouble extends NlsArgumentsSingle {
       return this.key2;
     }
     return super.getKey(index);
+  }
+
+  @Override
+  public NlsArguments with(String newKey, Object newValue) {
+
+    assert (!this.key.equals(newKey) && !this.key2.equals(newKey));
+    Map<String, Object> map = new HashMap<>();
+    map.put(this.key, this.value);
+    map.put(this.key2, this.value2);
+    map.put(newKey, newValue);
+    return new NlsArgumentsMap(map);
   }
 
 }

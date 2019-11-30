@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package io.github.mmm.nls.argument.impl;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -58,6 +59,15 @@ public class NlsArgumentsMap implements NlsArguments {
   public boolean isEmpty() {
 
     return this.map.isEmpty();
+  }
+
+  @Override
+  public NlsArguments with(String key, Object value) {
+
+    assert (!this.map.containsKey(key));
+    Map<String, Object> newMap = new HashMap<>(this.map);
+    newMap.put(key, value);
+    return new NlsArgumentsMap(newMap);
   }
 
 }

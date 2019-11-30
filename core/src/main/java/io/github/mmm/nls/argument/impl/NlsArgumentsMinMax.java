@@ -2,6 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package io.github.mmm.nls.argument.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import io.github.mmm.nls.argument.NlsArguments;
 
 /**
@@ -58,6 +61,17 @@ public class NlsArgumentsMinMax implements NlsArguments {
       return KEY_MAX;
     }
     return null;
+  }
+
+  @Override
+  public NlsArguments with(String newKey, Object newValue) {
+
+    assert (!KEY_MIN.equals(newKey) && !KEY_MAX.equals(newKey));
+    Map<String, Object> map = new HashMap<>();
+    map.put(KEY_MIN, this.min);
+    map.put(KEY_MAX, this.max);
+    map.put(newKey, newValue);
+    return new NlsArgumentsMap(map);
   }
 
 }

@@ -11,9 +11,9 @@ import io.github.mmm.nls.argument.NlsArguments;
  */
 public class NlsArgumentsSingle implements NlsArguments {
 
-  private final String key;
+  final String key;
 
-  private final Object value;
+  final Object value;
 
   /**
    * The constructor.
@@ -57,6 +57,13 @@ public class NlsArgumentsSingle implements NlsArguments {
       return this.key;
     }
     return null;
+  }
+
+  @Override
+  public NlsArguments with(String newKey, Object newValue) {
+
+    assert (!this.key.equals(this.key));
+    return new NlsArgumentsDouble(this.key, this.value, newKey, newValue);
   }
 
 }

@@ -15,8 +15,9 @@ import io.github.mmm.nls.argument.impl.NlsArgumentsSingle;
 
 /**
  * A simple container for {@link #get(String) argument}s used as {@link io.github.mmm.nls.NlsMessage#getArguments
- * dynamic arguments} to fill into a {@link io.github.mmm.nls.NlsMessage}. It is similar to {@link java.util.Map} but
- * with less overhead in case there are only up to two arguments.
+ * dynamic arguments} of a {@link io.github.mmm.nls.NlsMessage}. It is similar to {@link java.util.Map} but with less
+ * overhead in case there are only up to two arguments.<br>
+ * This interface provides many static {@code of*} methods to create instances of {@link NlsArguments}.
  *
  * @see io.github.mmm.nls.NlsMessage#getArgument(String)
  * @see io.github.mmm.nls.variable.NlsVariable
@@ -49,6 +50,13 @@ public interface NlsArguments extends NlsArgumentsKeys {
 
     return size() == 0;
   }
+
+  /**
+   * @param key the key of the argument.
+   * @param value the {@link #get(String) value} of the argument.
+   * @return the new {@link NlsArguments} extended with the given argument.
+   */
+  NlsArguments with(String key, Object value);
 
   /**
    * @return an empty instance of {@link NlsArguments}.
@@ -222,6 +230,17 @@ public interface NlsArguments extends NlsArgumentsKeys {
   public static NlsArguments ofMinMax(Object min, Object max) {
 
     return new NlsArgumentsMinMax(min, max);
+  }
+
+  /**
+   * @param value the {@link #get(String) value} for {@link #KEY_VALUE}.
+   * @param min the {@link #get(String) value} for {@link #KEY_MIN}.
+   * @param max the {@link #get(String) value} for {@link #KEY_MAX}.
+   * @return an instance of {@link NlsArguments} containing the single specified arguments.
+   */
+  public static NlsArguments ofValueMinMax(Object value, Object min, Object max) {
+
+    return of(KEY_VALUE, value, KEY_MIN, min, KEY_MAX, max);
   }
 
 }

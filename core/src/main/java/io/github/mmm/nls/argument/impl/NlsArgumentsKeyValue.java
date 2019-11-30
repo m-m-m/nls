@@ -2,6 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package io.github.mmm.nls.argument.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import io.github.mmm.nls.argument.NlsArguments;
 
 /**
@@ -58,6 +61,17 @@ public class NlsArgumentsKeyValue implements NlsArguments {
       return KEY_VALUE;
     }
     return null;
+  }
+
+  @Override
+  public NlsArguments with(String newKey, Object newValue) {
+
+    assert (!KEY_KEY.equals(newKey) && !KEY_VALUE.equals(newKey));
+    Map<String, Object> map = new HashMap<>();
+    map.put(KEY_KEY, this.key);
+    map.put(KEY_VALUE, this.value);
+    map.put(newKey, newValue);
+    return new NlsArgumentsMap(map);
   }
 
 }
