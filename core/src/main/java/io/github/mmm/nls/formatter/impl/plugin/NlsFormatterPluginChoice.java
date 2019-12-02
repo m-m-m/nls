@@ -151,7 +151,7 @@ public class NlsFormatterPluginChoice extends AbstractNlsFormatterPlugin {
     if (scanner.expect(CONDITION_VAR)) {
       // variable choice
       String symbol = scanner.readWhile(FILTER_COMPARATOR);
-      CompareOperator comparator = CompareOperator.fromValue(symbol);
+      CompareOperator comparator = CompareOperator.ofSymbol(symbol);
       if (comparator == null) {
         throw new IllegalArgumentException(symbol);
       }
