@@ -6,8 +6,9 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.MessageFormat;
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
-import java.util.Calendar;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -216,17 +217,14 @@ public class NlsMessageTest extends Assertions implements NlsArgumentsKeys {
 
     // date choice
     message = "{value,choice,(?==2010-01-31T23:59:59Z)'special day'(?>2010-01-31T23:59:59Z)'after'(else)'before'}";
-    Calendar calendar = Calendar.getInstance();
-    calendar.setTimeZone(TimeZone.getTimeZone("GMT"));
-    calendar.set(2010, Calendar.JANUARY, 31, 23, 59, 59);
-    calendar.set(Calendar.MILLISECOND, 0);
-    msg = factory.create(NlsBundleTest.BUNDLE, "dummy-key", message, NlsArguments.ofValue(calendar));
+    LocalDateTime datetime = LocalDateTime.of(2010, 01, 31, 23, 59, 59);
+    msg = factory.create(NlsBundleTest.BUNDLE, "dummy-key", message, NlsArguments.ofValue(datetime));
     assertThat(msg.getMessage()).isEqualTo("special day");
-    calendar.add(Calendar.SECOND, 1);
-    msg = factory.create(NlsBundleTest.BUNDLE, "dummy-key", message, NlsArguments.ofValue(calendar.getTime()));
+    msg = factory.create(NlsBundleTest.BUNDLE, "dummy-key", message,
+        NlsArguments.ofValue(datetime.plus(1, ChronoUnit.SECONDS)));
     assertThat(msg.getMessage()).isEqualTo("after");
-    calendar.add(Calendar.MINUTE, -1);
-    msg = factory.create(NlsBundleTest.BUNDLE, "dummy-key", message, NlsArguments.ofValue(calendar));
+    msg = factory.create(NlsBundleTest.BUNDLE, "dummy-key", message,
+        NlsArguments.ofValue(datetime = datetime.minus(1, ChronoUnit.SECONDS)));
     assertThat(msg.getMessage()).isEqualTo("before");
 
     // string choice
