@@ -37,20 +37,20 @@
  * <h3>The Solution</h3> The solution is quite simple:<br>
  * We simply bundle the message in default language together with the separated dynamic arguments in one container
  * object that is called {@link io.github.mmm.nls.NlsMessage}. For exceptions there is additional support via
- * {@link io.github.mmm.nls.exception.NlsException}. Here is an example to clarify the idea of
+ * {@link io.github.mmm.base.exception.ApplicationException}. Here is an example to clarify the idea of
  * {@link io.github.mmm.nls.NlsMessage}: The i18n message is "Hi {name}! How are you?" and the dynamic argument is the
  * users name e.g. "Lilli". Now if we store these informations together we have all we need. To get the localized
  * message we simply translate the i18n message to the proper language and then fill in the arguments. If we can NOT
  * translate we always have the message in default language which is "Hi Lilli! How are you?". <br>
  * But how do we translate the i18n message to other languages? The answer is quite easy:
  * <h4>NlsBundle</h4> The recommended approach is to create a final class derived from
- * {@link net.sf.mmm.nls.bundle.NlsBundle}. For each message you define a method that takes the arguments to fill in and
+ * {@link io.github.mmm.nls.NlsBundle}. For each message you define a method that takes the arguments to fill in and
  * returns an {@link io.github.mmm.nls.NlsMessage}:
  *
  * <pre>
  * package foo.bar;
  *
- * public final class NlsBundleFooBar extends {@link net.sf.mmm.nls.NlsBundle} {
+ * public final class NlsBundleFooBar extends {@link io.github.mmm.nls.NlsBundle} {
  *
  *   public static final NlsBundleFooBar INSTANCE = new NlsBundleFooBar();
  *
@@ -88,7 +88,7 @@
  * }
  * </pre>
  *
- * For further details see {@link net.sf.mmm.nls.bundle.NlsBundle}. <br>
+ * For further details see {@link io.github.mmm.nls.NlsBundle}. <br>
  * <br>
  * For localization you can create property files with the translations of your NLS-bundle. E.g.
  * {@code foo/bar/NlsBundleFooBar_de.properties} with this content:
@@ -103,7 +103,7 @@
  * See {@link io.github.mmm.nls.NlsMessage} for further details.
  *
  * In order to support you with creating and maintaining the localized properties, this solution also comes with the
- * {@code net.sf.mmm.nls.NlsBundleSynchronizer}. <br>
+ * {@code io.github.mmm.nls.sync.NlsSynchronizer}. <br>
  * <h3>Conclusion</h3> As we have seen the NLS provided here makes it very easy for developers to write and maintain
  * internationalized code. While messages are created throughout the code they only need to be localized for the
  * end-user in the client and at service-endpoints. Only at these places you need to figure out the users locale (e.g.
@@ -111,8 +111,8 @@
  * <ul>
  * <li>The {@link io.github.mmm.nls.NlsMessage} allows to store an internationalized message together with actual
  * arguments to fill in.</li>
- * <li>The arguments can be arbitrary objects including {@link io.github.mmm.nls.NlsObject}s that will be localized
- * recursively.</li>
+ * <li>The arguments can be arbitrary objects including {@link io.github.mmm.base.i18n.LocalizableObject}s that will be
+ * localized recursively.</li>
  * <li>There are powerful ways to format these arguments including variable expressions for optional arguments or plural
  * forms. See {@link io.github.mmm.nls.NlsMessage} for advanced examples.</li>
  * <li>Instead of numbered arguments we support named arguments what makes maintenance of the messages a lot easier.
@@ -121,7 +121,7 @@
  * escape characters to unicode number sequences.</li>
  * <li>The localization (translation to native language) is easily performed by
  * {@link io.github.mmm.nls.NlsMessage#getLocalizedMessage(java.util.Locale)}.</li>
- * <li>For exceptions there is additional support via {@link io.github.mmm.nls.exception.NlsException}.</li>
+ * <li>For exceptions there is additional support via {@link io.github.mmm.base.exception.ApplicationException}.</li>
  * </ul>
  */
 module io.github.mmm.nls {

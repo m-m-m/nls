@@ -252,7 +252,7 @@ import io.github.mmm.nls.formatter.impl.plugin.NlsFormatterPluginDefault;
  * </tr>
  * <tr>
  * <td>{@link NlsFormatterManager#TYPE_CHOICE choice}</td>
- * <td>(?>=5){key,choice,(?==true)'a'(else){key2}}(else)'c'</td>
+ * <td>({@literal ?>=5}){key,choice,(?==true)'a'(else){key2}}(else)'c'</td>
  * <td>a</td>
  * <td>A choice that results to 'c' if the value is NOT greater or equal to 5. Otherwise it results to 'a' if the value
  * of the argument "key" is {@link Boolean#TRUE}. Otherwise it results to the value of the argument "key2". - This is a
