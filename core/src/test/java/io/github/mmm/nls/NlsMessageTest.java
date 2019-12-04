@@ -116,10 +116,13 @@ public class NlsMessageTest extends Assertions implements NlsArgumentsKeys {
   public void testMessageWithDateTimeCustomPattern() {
 
     OffsetDateTime offsetDateTime = OffsetDateTime.parse("1999-12-31T23:59:59+01:00");
+    TimeZone systemTimeZone = TimeZone.getDefault();
+    TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
     Date date = Date.from(offsetDateTime.toInstant());
     NlsMessage msg = NlsMessageFactory.get().create(NlsBundleTest.BUNDLE, "non-existent-key",
         "{date,date,yyyyMMdd_HHmmss}", NlsArguments.ofDate(date));
-    assertThat(msg.getMessage()).isEqualTo("19991231_235959");
+    assertThat(msg.getMessage()).isEqualTo("19991231_225959");
+    TimeZone.setDefault(systemTimeZone);
   }
 
   public void testMessageWithAllDateFormats() {
