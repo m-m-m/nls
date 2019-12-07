@@ -7,6 +7,7 @@ image:https://img.shields.io/maven-central/v/io.github.m-m-m/mmm-nls.svg?label=M
 image:https://travis-ci.org/m-m-m/nls.svg?branch=master["build-status",link="https://travis-ci.org/m-m-m/nls"]
 
 The module `mmm-nls` provides advanced native-language-support.
+For a motivation and introduction please read the https://m-m-m.github.io/docs/api/io.github.mmm.nls/module-summary.html[docs].
 
 == Usage
 
