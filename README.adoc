@@ -18,10 +18,59 @@ Maven Dependency:
 <dependency>
   <groupId>io.github.m-m-m</groupId>
   <artifactId>mmm-nls</artifactId>
+  <version>${mmm.nls.version}</version>
 </dependency>
 ```
 
 Module Dependency:
 ```java
   requires transitive io.github.mmm.nls;
+```
+
+= mmm-nls-cli
+
+image:https://img.shields.io/maven-central/v/io.github.m-m-m/mmm-nls-cli.svg?label=Maven%20Central["Maven Central",link=https://search.maven.org/search?q=g:io.github.m-m-m]
+image:https://m-m-m.github.io/javadoc.svg["apidoc",link="https://m-m-m.github.io/docs/api/io.github.mmm.nls.cli/module-summary.html"]
+
+The module `io.github.mmm.nls.cli` (artifactId `mmm-nls-cli`) provides NLS for command-line-interfaces (CLI).
+For a motivation and introduction please read the JavaDocs (see badge above).
+
+== Usage
+
+Maven Dependency:
+```xml
+<dependency>
+  <groupId>io.github.m-m-m</groupId>
+  <artifactId>mmm-nls-cli</artifactId>
+  <version>${mmm.nls.version}</version>
+</dependency>
+```
+
+Module Dependency:
+```java
+  requires transitive io.github.mmm.nls.cli;
+```
+
+= mmm-nls-sync
+
+image:https://img.shields.io/maven-central/v/io.github.m-m-m/mmm-nls-sync.svg?label=Maven%20Central["Maven Central",link=https://search.maven.org/search?q=g:io.github.m-m-m]
+image:https://m-m-m.github.io/javadoc.svg["apidoc",link="https://m-m-m.github.io/docs/api/io.github.mmm.nls.sync/module-summary.html"]
+
+The module `io.github.mmm.nls.sync` (artifactId `mmm-nls-sync`) provides the tool `io.github.mmm.nls.sync.NlsSynchronizer` allowing to synchronize your `NlsBundle` classes with all your available resource-bundle properties files.
+For a motivation and introduction please read the JavaDocs (see badge above).
+
+== Usage
+
+Maven Dependency:
+```xml
+<dependency>
+  <groupId>io.github.m-m-m</groupId>
+  <artifactId>mmm-nls-sync</artifactId>
+  <version>${mmm.nls.version}</version>
+</dependency>
+```
+
+Module Dependency:
+```java
+  requires transitive io.github.mmm.nls.sync;
 ```
