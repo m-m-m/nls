@@ -39,9 +39,9 @@
  * object that is called {@link io.github.mmm.nls.NlsMessage}. For exceptions there is additional support via
  * {@link io.github.mmm.base.exception.ApplicationException}. Here is an example to clarify the idea of
  * {@link io.github.mmm.nls.NlsMessage}: The i18n message is "Hi {name}! How are you?" and the dynamic argument is the
- * users name e.g. "Lilli". Now if we store these informations together we have all we need. To get the localized
- * message we simply translate the i18n message to the proper language and then fill in the arguments. If we can NOT
- * translate we always have the message in default language which is "Hi Lilli! How are you?". <br>
+ * users name e.g. "Lilli". Now if we store this information together we have all we need. To get the localized message
+ * we simply translate the i18n message to the proper language and then fill in the arguments. If we can NOT translate
+ * we always have the message in default language which is "Hi Lilli! How are you?". <br>
  * But how do we translate the i18n message to other languages? The answer is quite easy:
  * <h4>NlsBundle</h4> The recommended approach is to create a final class derived from
  * {@link io.github.mmm.nls.NlsBundle}. For each message you define a method that takes the arguments to fill in and
@@ -50,9 +50,9 @@
  * <pre>
  * package foo.bar;
  *
- * public final class NlsBundleFooBar extends {@link io.github.mmm.nls.NlsBundle} {
+ * public final class NlsBundleExample extends {@link io.github.mmm.nls.NlsBundle} {
  *
- *   public static final NlsBundleFooBar INSTANCE = new NlsBundleFooBar();
+ *   public static final NlsBundleExample INSTANCE = new NlsBundleExample();
  *
  *   {@link io.github.mmm.nls.NlsMessage} messageSayHi(String name) {
  *     return create("messageSayHi", "Hi {name}! How are you?", {@link io.github.mmm.nls.argument.NlsArguments#ofName(Object) NlsArguments.ofName}(name));
@@ -68,7 +68,8 @@
  *
  * <pre>
  * String userName = "Lilli";
- * {@link io.github.mmm.nls.NlsMessage} msg = NlsBundleFooBar.INSTANCE.messageSayHi(userName);
+ * {@link io.github.mmm.nls.NlsMessage} msg = NlsBundleExample.INSTANCE.messageSayHi(userName);
+ * String text = msg.{@link io.github.mmm.nls.NlsMessage#getMessage() getMessage}());
  * String textDefault = msg.{@link io.github.mmm.nls.NlsMessage#getLocalizedMessage() getLocalizedMessage}());
  * String textDe = msg.{@link io.github.mmm.nls.NlsMessage#getLocalizedMessage(java.util.Locale) getLocalizedMessage}({@link java.util.Locale#GERMAN}));
  * </pre>
@@ -83,7 +84,7 @@
  *   }
  *
  *   public LoginAlreadyInUseException(Throwable cause, String login) {
- *     super(NlsBundleFooBar.INSTANCE.errorLoginInUse(login), cause);
+ *     super(NlsBundleExample.INSTANCE.errorLoginInUse(login), cause);
  *   }
  * }
  * </pre>
@@ -91,16 +92,16 @@
  * For further details see {@link io.github.mmm.nls.NlsBundle}. <br>
  * <br>
  * For localization you can create property files with the translations of your NLS-bundle. E.g.
- * {@code foo/bar/NlsBundleFooBar_de.properties} with this content:
+ * {@code foo/bar/NlsBundleExample_de.properties} with this content:
  *
  * <pre>
  * messageSayHi = Hallo {name}! Wie geht es Dir?
  * errorLoginInUse = Es tut uns leid. Das Login "{login}" ist bereits vergeben. Bitte wählen Sie ein anderes Login.
  * </pre>
  *
- * Unlike the Java defaults, you can use named parameters as instead of indexes what makes it much easier for
- * localizers. There are even more advanced features such as recursive translation of arguments and choice format type.
- * See {@link io.github.mmm.nls.NlsMessage} for further details.
+ * Unlike the Java defaults, you will use named parameters instead of indexes what makes it much easier for localizers.
+ * There are even more advanced features such as recursive translation of arguments and choice format type. See
+ * {@link io.github.mmm.nls.NlsMessage} for further details.
  *
  * In order to support you with creating and maintaining the localized properties, this solution also comes with the
  * {@code io.github.mmm.nls.sync.NlsSynchronizer}. <br>
