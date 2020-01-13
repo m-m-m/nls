@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Locale;
 
 import io.github.mmm.nls.argument.NlsArguments;
-import io.github.mmm.nls.formatter.NlsArgumentFormatter;
+import io.github.mmm.nls.formatter.NlsVariableFormatter;
 import io.github.mmm.nls.formatter.NlsMessageFormatter;
 import io.github.mmm.nls.variable.NlsVariable;
 import io.github.mmm.nls.variable.NlsVariableParser;
@@ -76,7 +76,7 @@ public class NlsMessageFormatterImpl extends AbstractNlsFormatter<Void> implemen
 
     for (PatternSegment segment : this.segments) {
       buffer.append(segment.prefix);
-      NlsArgumentFormatter.get().format(segment.variable, locale, arguments, buffer);
+      NlsVariableFormatter.get().format(segment.variable, locale, arguments, buffer);
     }
     buffer.append(this.suffix);
   }

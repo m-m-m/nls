@@ -14,7 +14,7 @@ import io.github.mmm.base.filter.CharFilter;
 import io.github.mmm.base.filter.ListCharFilter;
 import io.github.mmm.base.temporal.TemporalParser;
 import io.github.mmm.nls.argument.NlsArguments;
-import io.github.mmm.nls.formatter.NlsArgumentFormatter;
+import io.github.mmm.nls.formatter.NlsVariableFormatter;
 import io.github.mmm.nls.formatter.NlsFormatterManager;
 import io.github.mmm.nls.variable.NlsVariable;
 import io.github.mmm.nls.variable.NlsVariableParser;
@@ -213,7 +213,7 @@ public class NlsFormatterPluginChoice extends AbstractNlsFormatterPlugin {
         for (Segment segment : choice.segments) {
           buffer.append(segment.literal);
           if (segment.variable != null) {
-            NlsArgumentFormatter.get().format(segment.variable, locale, arguments, buffer);
+            NlsVariableFormatter.get().format(segment.variable, locale, arguments, buffer);
           }
         }
         return;

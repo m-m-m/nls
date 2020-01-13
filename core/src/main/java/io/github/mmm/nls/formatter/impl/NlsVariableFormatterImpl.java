@@ -7,7 +7,7 @@ import java.util.Locale;
 
 import io.github.mmm.base.justification.Justification;
 import io.github.mmm.nls.argument.NlsArguments;
-import io.github.mmm.nls.formatter.NlsArgumentFormatter;
+import io.github.mmm.nls.formatter.NlsVariableFormatter;
 import io.github.mmm.nls.formatter.NlsFormatter;
 import io.github.mmm.nls.variable.NlsVariable;
 
@@ -17,10 +17,10 @@ import io.github.mmm.nls.variable.NlsVariable;
  * {@link NlsVariable#getFormatter() according sub-formatter} (typically a
  * {@link io.github.mmm.nls.formatter.NlsFormatterPlugin}).
  */
-public class NlsArgumentFormatterImpl extends AbstractNlsFormatter<NlsVariable> implements NlsArgumentFormatter {
+public class NlsVariableFormatterImpl extends AbstractNlsFormatter<NlsVariable> implements NlsVariableFormatter {
 
   /** The singleton instance. */
-  public static final NlsArgumentFormatterImpl INSTANCE = new NlsArgumentFormatterImpl();
+  public static final NlsVariableFormatterImpl INSTANCE = new NlsVariableFormatterImpl();
 
   @SuppressWarnings({ "rawtypes", "unchecked" })
   @Override
