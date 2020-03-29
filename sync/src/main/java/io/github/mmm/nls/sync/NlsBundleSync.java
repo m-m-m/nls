@@ -8,9 +8,11 @@ import io.github.mmm.nls.argument.NlsArguments;
 
 /**
  * {@link NlsBundle} for {@link NlsSynchronizer}.
+ * 
+ * @since 1.0.0
  */
 @SuppressWarnings("javadoc")
-public class NlsBundleSync extends NlsBundle {
+public final class NlsBundleSync extends NlsBundle {
 
   public static final NlsBundleSync INSTANCE = new NlsBundleSync();
 

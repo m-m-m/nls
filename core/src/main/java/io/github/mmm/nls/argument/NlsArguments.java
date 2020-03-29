@@ -11,6 +11,7 @@ import io.github.mmm.nls.argument.impl.NlsArgumentsKeyValue;
 import io.github.mmm.nls.argument.impl.NlsArgumentsMap;
 import io.github.mmm.nls.argument.impl.NlsArgumentsMinMax;
 import io.github.mmm.nls.argument.impl.NlsArgumentsNone;
+import io.github.mmm.nls.argument.impl.NlsArgumentsObjectKey;
 import io.github.mmm.nls.argument.impl.NlsArgumentsSingle;
 
 /**
@@ -220,6 +221,16 @@ public interface NlsArguments extends NlsArgumentsKeys {
   public static NlsArguments ofKeyValue(Object key, Object value) {
 
     return new NlsArgumentsKeyValue(key, value);
+  }
+
+  /**
+   * @param object the {@link #get(String) value} for {@link #KEY_OBJECT}.
+   * @param key the {@link #get(String) value} for {@link #KEY_KEY}.
+   * @return an instance of {@link NlsArguments} containing the single specified arguments.
+   */
+  public static NlsArguments ofObjectKey(Object object, Object key) {
+
+    return new NlsArgumentsObjectKey(object, key);
   }
 
   /**

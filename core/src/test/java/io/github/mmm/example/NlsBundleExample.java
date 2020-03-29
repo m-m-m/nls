@@ -7,9 +7,24 @@ import io.github.mmm.nls.NlsMessage;
 import io.github.mmm.nls.argument.NlsArguments;
 
 @SuppressWarnings("all")
-public class NlsBundleExample extends NlsBundle {
+public final class NlsBundleExample extends NlsBundle {
 
   public static final NlsBundleExample INSTANCE = new NlsBundleExample();
+
+  private NlsBundleExample() {
+
+    super();
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param bundleName
+   */
+  public NlsBundleExample(String bundleName) {
+
+    super(bundleName);
+  }
 
   public NlsMessage msgWelcome(String name) {
 

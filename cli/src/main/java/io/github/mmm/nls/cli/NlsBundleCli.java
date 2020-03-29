@@ -8,9 +8,11 @@ import io.github.mmm.nls.argument.NlsArguments;
 
 /**
  * {@link NlsBundle} for command-line-interface (CLI).
+ *
+ * @since 1.0.0
  */
 @SuppressWarnings("javadoc")
-public class NlsBundleCli extends NlsBundle {
+public final class NlsBundleCli extends NlsBundle {
 
   public static final NlsBundleCli INSTANCE = new NlsBundleCli();
 
@@ -76,11 +78,6 @@ public class NlsBundleCli extends NlsBundle {
         "No arguments were specified. Please read help usage and provide required arguments.", NlsArguments.of());
   }
 
-  /**
-   * @param type
-   * @param superType
-   * @return
-   */
   public NlsMessage errTypeNotExtending(Object type, Object superType) {
 
     return create("errTypeNotExtending", "The type {type} does not extend the expected super-type {expected}.",

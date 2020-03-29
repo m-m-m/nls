@@ -10,32 +10,32 @@ import io.github.mmm.nls.argument.NlsArguments;
 /**
  * Empty implementation of {@link NlsArguments}.
  */
-public class NlsArgumentsKeyValue implements NlsArguments {
+public class NlsArgumentsObjectKey implements NlsArguments {
 
   private final Object key;
 
-  private final Object value;
+  private final Object object;
 
   /**
    * The constructor.
    *
+   * @param object the {@link #KEY_OBJECT object} {@link #get(String) value}.
    * @param key the {@link #KEY_KEY key} {@link #get(String) value}.
-   * @param value the {@link #KEY_VALUE value} {@link #get(String) value}.
    */
-  public NlsArgumentsKeyValue(Object key, Object value) {
+  public NlsArgumentsObjectKey(Object object, Object key) {
 
     super();
+    this.object = object;
     this.key = key;
-    this.value = value;
   }
 
   @Override
   public Object get(String argKey) {
 
-    if (KEY_KEY.equals(argKey)) {
+    if (KEY_OBJECT.equals(argKey)) {
+      return this.object;
+    } else if (KEY_KEY.equals(argKey)) {
       return this.key;
-    } else if (KEY_VALUE.equals(argKey)) {
-      return this.value;
     }
     return null;
   }
@@ -56,9 +56,9 @@ public class NlsArgumentsKeyValue implements NlsArguments {
   public String getKey(int index) {
 
     if (index == 0) {
-      return KEY_KEY;
+      return KEY_OBJECT;
     } else if (index == 1) {
-      return KEY_VALUE;
+      return KEY_KEY;
     }
     return null;
   }
@@ -66,10 +66,10 @@ public class NlsArgumentsKeyValue implements NlsArguments {
   @Override
   public NlsArguments with(String newKey, Object newValue) {
 
-    assert (!KEY_KEY.equals(newKey) && !KEY_VALUE.equals(newKey));
+    assert (!KEY_KEY.equals(newKey) && !KEY_OBJECT.equals(newKey));
     Map<String, Object> map = new HashMap<>();
     map.put(KEY_KEY, this.key);
-    map.put(KEY_VALUE, this.value);
+    map.put(KEY_OBJECT, this.object);
     map.put(newKey, newValue);
     return new NlsArgumentsMap(map);
   }
