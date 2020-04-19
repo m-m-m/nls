@@ -22,7 +22,7 @@
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-l10n</artifactId>
+      <artifactId>mmm-l10n-all</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
