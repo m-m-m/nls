@@ -111,7 +111,10 @@ public class NlsBundle implements NlsBundleDescriptor, NlsArgumentsKeys {
   protected String createBundleName() {
 
     Class<?> type = getClass();
-    return type.getPackageName() + ".nls." + type.getSimpleName();
+    String simpleName = type.getSimpleName();
+    String pkg = type.getName();
+    pkg = pkg.substring(0, pkg.length() - simpleName.length());
+    return pkg + "nls." + simpleName;
   }
 
   @Override

@@ -3,7 +3,6 @@
 package io.github.mmm.nls.formatter.impl.plugin;
 
 import java.io.IOException;
-import java.time.temporal.Temporal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -12,10 +11,9 @@ import java.util.function.Predicate;
 import io.github.mmm.base.compare.CompareOperator;
 import io.github.mmm.base.filter.CharFilter;
 import io.github.mmm.base.filter.ListCharFilter;
-import io.github.mmm.base.temporal.TemporalParser;
 import io.github.mmm.nls.argument.NlsArguments;
-import io.github.mmm.nls.formatter.NlsVariableFormatter;
 import io.github.mmm.nls.formatter.NlsFormatterManager;
+import io.github.mmm.nls.formatter.NlsVariableFormatter;
 import io.github.mmm.nls.variable.NlsVariable;
 import io.github.mmm.nls.variable.NlsVariableParser;
 import io.github.mmm.scanner.CharSequenceScanner;
@@ -194,12 +192,12 @@ public class NlsFormatterPluginChoice extends AbstractNlsFormatterPlugin {
       } else if ("false".equals(argument)) {
         comparatorArgument = Boolean.FALSE;
       } else {
-        Temporal temporal = TemporalParser.parse(argument);
-        if (temporal != null) {
-          comparatorArgument = (Comparable<?>) temporal;
-        } else {
-          comparatorArgument = Double.valueOf(argument);
-        }
+        // Temporal temporal = TemporalParser.parse(argument);
+        // if (temporal != null) {
+        // comparatorArgument = (Comparable<?>) temporal;
+        // } else {
+        comparatorArgument = Double.valueOf(argument);
+        // }
       }
     }
     return comparatorArgument;

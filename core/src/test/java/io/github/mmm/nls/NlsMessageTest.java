@@ -14,6 +14,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import io.github.mmm.base.compare.CompareOperator;
@@ -191,7 +192,7 @@ public class NlsMessageTest extends Assertions implements NlsArgumentsKeys {
   }
 
   /**
-   * Tests {@link NlsFormatterManager#TYPE_NUMBER number format}.
+   * Tests {@link NlsFormatterManager#TYPE_CHOICE choice format}.
    */
   @Test
   public void testMessageWithChoice() {
@@ -200,8 +201,8 @@ public class NlsMessageTest extends Assertions implements NlsArgumentsKeys {
     String message;
 
     // boolean choice
-    message = "{value,choice,(?==true)'foo'(else)'bar'}";
     NlsMessageFactory factory = NlsMessageFactory.get();
+    message = "{value,choice,(?==true)'foo'(else)'bar'}";
     msg = factory.create(NlsBundleTest.BUNDLE, "dummy-key", message, NlsArguments.ofValue(Boolean.TRUE));
     assertThat(msg.getMessage()).isEqualTo("foo");
     msg = factory.create(NlsBundleTest.BUNDLE, "dummy-key", message, NlsArguments.ofValue(Boolean.FALSE));
@@ -217,18 +218,6 @@ public class NlsMessageTest extends Assertions implements NlsArgumentsKeys {
     assertThat(msg.getMessage()).isEqualTo("negative");
     msg = factory.create(NlsBundleTest.BUNDLE, "dummy-key", message, NlsArguments.ofValue(0));
     assertThat(msg.getMessage()).isEqualTo("zero");
-
-    // date choice
-    message = "{value,choice,(?==2010-01-31T23:59:59Z)'special day'(?>2010-01-31T23:59:59Z)'after'(else)'before'}";
-    LocalDateTime datetime = LocalDateTime.of(2010, 01, 31, 23, 59, 59);
-    msg = factory.create(NlsBundleTest.BUNDLE, "dummy-key", message, NlsArguments.ofValue(datetime));
-    assertThat(msg.getMessage()).isEqualTo("special day");
-    msg = factory.create(NlsBundleTest.BUNDLE, "dummy-key", message,
-        NlsArguments.ofValue(datetime.plus(1, ChronoUnit.SECONDS)));
-    assertThat(msg.getMessage()).isEqualTo("after");
-    msg = factory.create(NlsBundleTest.BUNDLE, "dummy-key", message,
-        NlsArguments.ofValue(datetime = datetime.minus(1, ChronoUnit.SECONDS)));
-    assertThat(msg.getMessage()).isEqualTo("before");
 
     // string choice
     message = "{value,choice,(?=='hello')'magic'(?>'hello')'after'(else)'before'}";
@@ -286,6 +275,31 @@ public class NlsMessageTest extends Assertions implements NlsArgumentsKeys {
       }
       assertThat(t).hasMessage("only (else) condition!");
     }
+  }
+
+  /**
+   * Tests {@link NlsFormatterManager#TYPE_CHOICE choice format}.
+   */
+  @Test
+  @Disabled("https://github.com/konsoletyper/teavm/pull/467")
+  public void testMessageWithChoiceWithTemporal() {
+
+    NlsMessage msg;
+    String message;
+    NlsMessageFactory factory = NlsMessageFactory.get();
+
+    // date choice
+    message = "{value,choice,(?==2010-01-31T23:59:59Z)'special day'(?>2010-01-31T23:59:59Z)'after'(else)'before'}";
+    LocalDateTime datetime = LocalDateTime.of(2010, 01, 31, 23, 59, 59);
+    msg = factory.create(NlsBundleTest.BUNDLE, "dummy-key", message, NlsArguments.ofValue(datetime));
+    assertThat(msg.getMessage()).isEqualTo("special day");
+    msg = factory.create(NlsBundleTest.BUNDLE, "dummy-key", message,
+        NlsArguments.ofValue(datetime.plus(1, ChronoUnit.SECONDS)));
+    assertThat(msg.getMessage()).isEqualTo("after");
+    msg = factory.create(NlsBundleTest.BUNDLE, "dummy-key", message,
+        NlsArguments.ofValue(datetime = datetime.minus(1, ChronoUnit.SECONDS)));
+    assertThat(msg.getMessage()).isEqualTo("before");
+
   }
 
   /**
