@@ -28,33 +28,32 @@ public final class NlsBundleCli extends NlsBundle {
 
   public NlsMessage msgRequiredOptions() {
 
-    return create("msgRequiredOptions", "Required options:", NlsArguments.of());
+    return create("msgRequiredOptions", "Required options:");
   }
 
   public NlsMessage msgAdditionalOptions() {
 
-    return create("msgAdditionalOptions", "Additional options:", NlsArguments.of());
+    return create("msgAdditionalOptions", "Additional options:");
   }
 
   public NlsMessage msgParameters() {
 
-    return create("msgParameters", "Parameters:", NlsArguments.of());
+    return create("msgParameters", "Parameters:");
   }
 
   public NlsMessage optLocale() {
 
-    return create("optionLocale", "The locale for translation (e.g. use '-Duser.language=de' for German).",
-        NlsArguments.of());
+    return create("optionLocale", "The locale for translation (e.g. use '-Duser.language=de' for German).");
   }
 
   public NlsMessage optHelp() {
 
-    return create("optionHelp", "Print this help.", NlsArguments.of());
+    return create("optionHelp", "Print this help.");
   }
 
   public NlsMessage optVersion() {
 
-    return create("optionVersion", "Print the version of this program.", NlsArguments.of());
+    return create("optionVersion", "Print the version of this program.");
   }
 
   public NlsMessage errArgumentMandatory(String name) {
@@ -75,7 +74,7 @@ public final class NlsBundleCli extends NlsBundle {
   public NlsMessage errNoArguments() {
 
     return create("errNoArguments",
-        "No arguments were specified. Please read help usage and provide required arguments.", NlsArguments.of());
+        "No arguments were specified. Please read help usage and provide required arguments.");
   }
 
   public NlsMessage errTypeNotExtending(Object type, Object superType) {

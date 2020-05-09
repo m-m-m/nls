@@ -126,6 +126,16 @@ public class NlsBundle implements NlsBundleDescriptor, NlsArgumentsKeys {
   /**
    * @param key the {@link io.github.mmm.nls.descriptor.NlsMessageDescriptor#getMessageKey() message key}.
    * @param message the {@link NlsMessage#getInternationalizedMessage() internationalized message}.
+   * @return the {@link NlsMessage}.
+   */
+  protected NlsMessage create(String key, String message) {
+
+    return create(key, message, NlsArguments.of());
+  }
+
+  /**
+   * @param key the {@link io.github.mmm.nls.descriptor.NlsMessageDescriptor#getMessageKey() message key}.
+   * @param message the {@link NlsMessage#getInternationalizedMessage() internationalized message}.
    * @param arguments the {@link NlsMessage#getArguments() dynamic arguments} to fill into the message.
    * @return the {@link NlsMessage}.
    */

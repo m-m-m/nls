@@ -137,6 +137,8 @@ module io.github.mmm.nls {
 
   exports io.github.mmm.nls.descriptor;
 
+  exports io.github.mmm.nls.exception;
+
   exports io.github.mmm.nls.formatter;
 
   exports io.github.mmm.nls.template;

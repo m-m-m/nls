@@ -34,4 +34,10 @@ public final class NlsBundleException extends NlsBundle {
     return create("errObjectNotFound", "Could not find {object} for {key}.", NlsArguments.ofObjectKey(object, key));
   }
 
+  public NlsMessage errTechnical() {
+
+    return create("errTechnical",
+        "An unexpected error has occurred! We apologize any inconvenience. Please try again later.");
+  }
+
 }
