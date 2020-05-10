@@ -65,7 +65,7 @@ public class TechnicalErrorUserException extends ApplicationException {
    * @param exception is the {@link Throwable} to convert.
    * @return the {@link ApplicationException} with {@link #isForUser()} returning {@code true} .
    */
-  public static ApplicationException getOrCreateUserException(Throwable exception) {
+  public static ApplicationException convert(Throwable exception) {
 
     if (exception instanceof ApplicationException) {
       ApplicationException applicationException = (ApplicationException) exception;
