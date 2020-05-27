@@ -16,7 +16,7 @@ import io.github.mmm.nls.argument.NlsArgumentsKeys;
 @SuppressWarnings("all")
 public class NlsBundleTest extends Assertions {
 
-  static final String BUNDLE = "io.github.mmm.example.nls.NlsBundleExample";
+  static final String BUNDLE = "l10n.io.github.mmm.example.NlsBundleExample";
 
   @Test
   public void testNlsBundleExample() {

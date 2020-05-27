@@ -10,7 +10,6 @@ import java.util.Locale;
 
 import io.github.mmm.base.i18n.Localizable;
 import io.github.mmm.base.i18n.LocalizableObject;
-import io.github.mmm.nls.NlsBundle;
 import io.github.mmm.nls.NlsMessage;
 import io.github.mmm.nls.NlsMessageFactory;
 import io.github.mmm.nls.argument.NlsArguments;
@@ -41,7 +40,7 @@ public class NlsFormatterPluginDefault extends AbstractNlsFormatterPlugin {
       } else if (object instanceof Enum) {
         Enum<?> enumValue = (Enum<?>) object;
         Class<?> type = enumValue.getDeclaringClass();
-        NlsMessage message = NlsMessageFactory.get().create(NlsBundle.getBundleName(type), enumValue.name(),
+        NlsMessage message = NlsMessageFactory.get().create(Localizable.createBundleName(type), enumValue.name(),
             object.toString());
         message.getLocalizedMessage(locale, buffer);
         return;

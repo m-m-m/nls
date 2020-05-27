@@ -4,6 +4,7 @@ package io.github.mmm.nls;
 
 import java.util.Locale;
 
+import io.github.mmm.base.i18n.Localizable;
 import io.github.mmm.nls.argument.NlsArguments;
 import io.github.mmm.nls.argument.NlsArgumentsKeys;
 import io.github.mmm.nls.descriptor.NlsBundleDescriptor;
@@ -104,17 +105,14 @@ public class NlsBundle implements NlsBundleDescriptor, NlsArgumentsKeys {
   }
 
   /**
-   * Determines the static {@link #getBundleName() bundle name}. May be overridden to change default behaviour.
+   * Determines the static {@link #getBundleName() bundle name}. May be overridden to change default behavior.
    *
    * @return the {@link #getBundleName()}.
+   * @see Localizable#createBundleName(Class)
    */
   protected String createBundleName() {
 
-    Class<?> type = getClass();
-    String simpleName = type.getSimpleName();
-    String pkg = type.getName();
-    pkg = pkg.substring(0, pkg.length() - simpleName.length());
-    return pkg + "nls." + simpleName;
+    return Localizable.createBundleName(getClass());
   }
 
   @Override
@@ -142,16 +140,6 @@ public class NlsBundle implements NlsBundleDescriptor, NlsArgumentsKeys {
   protected NlsMessage create(String key, String message, NlsArguments arguments) {
 
     return NlsMessageFactory.get().create(this.bundleName, key, message, arguments);
-  }
-
-  /**
-   * @param type the {@link Class} to localize. Typically a {@link NlsBundle} but may also be an {@link Enum} or other
-   *        kind of datatype.
-   * @return the {@link #getBundleName() bundle name}.
-   */
-  public static String getBundleName(Class<?> type) {
-
-    return type.getPackageName() + ".nls." + type.getSimpleName();
   }
 
 }
