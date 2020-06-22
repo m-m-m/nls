@@ -65,7 +65,7 @@ public class NlsSynchronizer extends NlsMain {
     public Synchronizer() {
 
       super(NlsBundleSync.INSTANCE.msgHelp());
-      this.path = add(new CliStringProperty(NlsBundleSync.INSTANCE.optPath(), "src/main/resources"));
+      this.path = add(new CliStringProperty(NlsBundleSync.INSTANCE.optPath(), "src/main/resources", "path"));
       this.locales = add(new CliLocaleListProperty(NlsBundleSync.INSTANCE.optLocales(), true, "--locale", "-l"));
       this.bundleClasses = add(
           new CliClassListProperty<>(NlsBundleSync.INSTANCE.optBundles(), NlsBundle.class, true, "--bundle", "-b"));
