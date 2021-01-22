@@ -98,6 +98,9 @@ public class NlsTemplateImpl implements NlsTemplate, NlsMessageDescriptor {
   protected String translateFallback(Exception e) {
 
     String messageId = this.bundleName + ":" + this.messageKey;
+    if (e instanceof java.util.MissingResourceException) {
+      e = null; // avoid spam
+    }
     LOG.info("Failed to resolve message {}:{}", this.bundleName, this.messageKey, e);
     return translateFallback(messageId);
   }
