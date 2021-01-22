@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import io.github.mmm.base.compare.CompareOperator;
 import io.github.mmm.base.justification.Justification;
+import io.github.mmm.base.placement.Alignment;
 import io.github.mmm.nls.argument.NlsArguments;
 import io.github.mmm.nls.argument.NlsArgumentsKeys;
 import io.github.mmm.nls.formatter.NlsFormatterManager;
@@ -75,7 +76,7 @@ public class NlsMessageTest extends Assertions implements NlsArgumentsKeys {
   }
 
   @Test
-  public void testMessageWithEnumTranslation() {
+  public void testMessageWithEnumCompareOperator() {
 
     // given
     CompareOperator cmp = CompareOperator.GREATER_OR_EQUAL;
@@ -86,6 +87,29 @@ public class NlsMessageTest extends Assertions implements NlsArgumentsKeys {
     // when + then
     assertThat(message.getLocalizedMessage(Locale.ROOT)).isEqualTo("The value has to be greater or equal to '42'!");
     assertThat(message.getLocalizedMessage(Locale.GERMAN)).isEqualTo("Der Wert muss größer oder gleich '42' sein!");
+  }
+
+  @Test
+  public void testMessageWithEnumAlignment() {
+
+    // given
+    String text = "{alignment}";
+    // when + then
+    assertThat(create(Alignment.CENTER).getLocalizedMessage(Locale.ENGLISH)).isEqualTo("centered");
+    assertThat(create(Alignment.CENTER).getLocalizedMessage(Locale.GERMANY)).isEqualTo("zentriert");
+    assertThat(create(Alignment.CENTER).getLocalizedMessage(Locale.FRANCE)).isEqualTo("centré");
+    assertThat(create(Alignment.CENTER).getLocalizedMessage(new Locale("es", "ES"))).isEqualTo("centrado");
+    assertThat(create(Alignment.TOP_LEFT).getLocalizedMessage(Locale.ENGLISH)).isEqualTo("top left");
+    assertThat(create(Alignment.TOP_LEFT).getLocalizedMessage(Locale.GERMANY)).isEqualTo("oben links");
+    assertThat(create(Alignment.TOP_LEFT).getLocalizedMessage(Locale.FRANCE)).isEqualTo("en haut à gauche");
+    assertThat(create(Alignment.TOP_LEFT).getLocalizedMessage(new Locale("es", "ES")))
+        .isEqualTo("arriba a la izquierda");
+  }
+
+  private NlsMessage create(Alignment align) {
+
+    return NlsMessageFactory.get().create(NlsBundleTest.BUNDLE, "undefined", "{alignment}",
+        NlsArguments.of("alignment", align));
   }
 
   /**
