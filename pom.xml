@@ -15,8 +15,6 @@
   <description>Advanced Native Language Support (NLS).</description>
 
   <properties>
-    <revision>1.0.0</revision>
-    <changelist>-SNAPSHOT</changelist>
     <mmm.repository>nls</mmm.repository>
   </properties>
 
@@ -25,16 +23,6 @@
     <module>cli</module>
     <module>sync</module>
   </modules>
-
-  <dependencies>
-    <!-- Test -->
-    <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
-      <version>1.3.0-alpha5</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
 
   <dependencyManagement>
     <dependencies>
@@ -56,21 +44,21 @@
       <dependency>
         <groupId>${project.groupId}</groupId>
         <artifactId>mmm-l10n-parent</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>0.1.1</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>${project.groupId}</groupId>
         <artifactId>mmm-scanner-parent</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>0.1.1</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>${project.groupId}</groupId>
         <artifactId>mmm-cli-parent</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>0.1.1</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
