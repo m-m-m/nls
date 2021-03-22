@@ -30,7 +30,7 @@
       <dependency>
         <groupId>${project.groupId}</groupId>
         <artifactId>mmm-l10n-parent</artifactId>
-        <version>${project.version}</version>
+        <version>0.2.1-SNAPSHOT</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
