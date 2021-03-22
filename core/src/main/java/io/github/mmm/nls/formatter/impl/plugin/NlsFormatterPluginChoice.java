@@ -155,7 +155,7 @@ public class NlsFormatterPluginChoice extends AbstractNlsFormatterPlugin {
       }
       Comparable<?> comparatorArgument = parseComparatorArgument(scanner);
       condition = new Condition(comparator, comparatorArgument);
-    } else if (scanner.expect(CONDITION_ELSE, false)) {
+    } else if (scanner.expectUnsafe(CONDITION_ELSE, false)) {
       condition = FILTER_ELSE;
     } else {
       throw new IllegalArgumentException(scanner.substring(index, scanner.getCurrentIndex()));

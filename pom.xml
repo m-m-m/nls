@@ -9,13 +9,14 @@
     <relativePath>../parent/pom.xml</relativePath>
   </parent>
   <artifactId>mmm-nls-parent</artifactId>
-  <version>${revision}${changelist}</version>
+  <version>${revision}</version>
   <packaging>pom</packaging>
   <name>${project.artifactId}</name>
   <description>Advanced Native Language Support (NLS).</description>
 
   <properties>
     <mmm.repository>nls</mmm.repository>
+    <revision>0-SNAPSHOT</revision>
   </properties>
 
   <modules>
