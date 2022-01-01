@@ -29,7 +29,8 @@ public class NlsBundleTest extends Assertions {
     assertThat(message.getMessage()).isEqualTo("Bye,bye \"Joelle\"!");
     assertThat(message.getLocalizedMessage(Locale.GERMAN)).isEqualTo("Tschüss \"Joelle\"!");
     // no l10n for Japanese
-    assertThat(message.getLocalizedMessage(Locale.JAPANESE)).isEqualTo(message.getMessage());
+    assertThat(message.getLocalizedMessage(Locale.JAPANESE))
+        .isEqualTo(message.getLocalizedMessage(Locale.getDefault()));
   }
 
 }

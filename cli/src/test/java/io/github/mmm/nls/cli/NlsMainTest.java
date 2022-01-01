@@ -73,8 +73,8 @@ public class NlsMainTest extends Assertions {
     // when
     int code = prg.run(args);
     // then
-    assertThat(err.toString()).isEqualTo(expectedErr);
-    assertThat(out.toString()).isEqualTo(expectedOut);
+    assertThat(err.toString().replace("\r", "")).isEqualTo(expectedErr);
+    assertThat(out.toString().replace("\r", "")).isEqualTo(expectedOut);
     assertThat(code).isEqualTo(expectedCode);
   }
 
