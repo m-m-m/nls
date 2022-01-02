@@ -14,6 +14,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -32,6 +33,12 @@ import io.github.mmm.nls.formatter.NlsMessageFormatterFactory;
 public class NlsMessageTest extends Assertions implements NlsArgumentsKeys {
 
   private static final char NON_BREAKING_SPACE = 0x000A0;
+
+  @BeforeAll
+  static void setup() {
+
+    Locale.setDefault(Locale.ROOT);
+  }
 
   /**
    * This method tests the {@link net.sf.mmm.util.nls.api.NlsMessage} using a custom resolver.
