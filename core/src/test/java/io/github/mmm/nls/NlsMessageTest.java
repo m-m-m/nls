@@ -35,7 +35,7 @@ public class NlsMessageTest extends Assertions implements NlsArgumentsKeys {
   private static final char NON_BREAKING_SPACE = 0x000A0;
 
   @BeforeAll
-  static void setup() {
+  public static void setup() {
 
     Locale.setDefault(Locale.ROOT);
   }
