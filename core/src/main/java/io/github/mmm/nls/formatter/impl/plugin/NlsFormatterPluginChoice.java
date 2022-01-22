@@ -66,7 +66,7 @@ public class NlsFormatterPluginChoice extends AbstractNlsFormatterPlugin {
   private static final CharFilter FILTER_COMPARATOR = new ListCharFilter('<', '=', '>', '!');
 
   /** The {@link CharFilter} for the comparator argument. */
-  private static final CharFilter FILTER_COMPARATOR_ARGUMENT = CharFilter.LATIN_DIGIT_OR_LETTER_FILTER
+  private static final CharFilter FILTER_COMPARATOR_ARGUMENT = CharFilter.LATIN_LETTER_OR_DIGIT
       .compose(new ListCharFilter('-', '+', '.', ':'));
 
   /** The {@link Choice}s. */
@@ -146,7 +146,7 @@ public class NlsFormatterPluginChoice extends AbstractNlsFormatterPlugin {
 
     int index = scanner.getCurrentIndex();
     Predicate<Object> condition;
-    if (scanner.expect(CONDITION_VAR)) {
+    if (scanner.expectOne(CONDITION_VAR)) {
       // variable choice
       String symbol = scanner.readWhile(FILTER_COMPARATOR);
       CompareOperator comparator = CompareOperator.ofSymbol(symbol);
@@ -160,7 +160,7 @@ public class NlsFormatterPluginChoice extends AbstractNlsFormatterPlugin {
     } else {
       throw new IllegalArgumentException(scanner.substring(index, scanner.getCurrentIndex()));
     }
-    if (!scanner.expect(CONDITION_END)) {
+    if (!scanner.expectOne(CONDITION_END)) {
       throw new IllegalArgumentException(scanner.substring(index, scanner.getCurrentIndex()));
     }
     return condition;

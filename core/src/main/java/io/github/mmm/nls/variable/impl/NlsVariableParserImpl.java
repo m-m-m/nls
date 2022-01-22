@@ -30,7 +30,7 @@ public class NlsVariableParserImpl implements NlsVariableParser {
   public NlsVariable parse(CharSequenceScanner scanner) {
 
     NlsFormatterManager formatterManager = NlsFormatterManager.get();
-    String key = scanner.readWhile(CharFilter.IDENTIFIER_FILTER);
+    String key = scanner.readWhile(CharFilter.IDENTIFIER);
     char c = scanner.next();
     int index = scanner.getCurrentIndex();
     String formatType = null;
