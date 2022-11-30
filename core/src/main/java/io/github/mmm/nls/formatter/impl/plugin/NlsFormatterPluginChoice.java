@@ -61,7 +61,7 @@ public class NlsFormatterPluginChoice extends AbstractNlsFormatterPlugin {
   private static final Predicate<Object> FILTER_ELSE = new Condition(null, null);
 
   /**
-   * The {@link CharFilter} for the {@link CompareOperator#getValue() comparator symbol} .
+   * The {@link CharFilter} for the {@link CompareOperator#getSyntax() comparator symbol} .
    */
   private static final CharFilter FILTER_COMPARATOR = new ListCharFilter('<', '=', '>', '!');
 
@@ -82,14 +82,14 @@ public class NlsFormatterPluginChoice extends AbstractNlsFormatterPlugin {
     super();
     this.choices = new ArrayList<>();
     boolean hasElse = false;
-    char c = scanner.forceNext();
+    char c = scanner.next();
     while ((c == CONDITION_START) && (!hasElse)) {
       Choice choice = parseChoice(scanner);
       if (choice.condition == FILTER_ELSE) {
         hasElse = true;
       }
       this.choices.add(choice);
-      c = scanner.forceNext();
+      c = scanner.next();
     }
     if (!hasElse) {
       throw new IllegalStateException("no (else) condition!");
@@ -176,7 +176,7 @@ public class NlsFormatterPluginChoice extends AbstractNlsFormatterPlugin {
 
     int index = scanner.getCurrentIndex();
     Comparable<?> comparatorArgument;
-    char c = scanner.forcePeek();
+    char c = scanner.peek();
     if ((c == '"') || (c == '\'')) {
       scanner.next();
       comparatorArgument = scanner.readUntil(c, false, c);

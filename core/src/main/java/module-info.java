@@ -129,6 +129,8 @@ module io.github.mmm.nls {
 
   requires transitive io.github.mmm.scanner;
 
+  requires static io.github.mmm.base.placement;
+
   requires org.slf4j;
 
   exports io.github.mmm.nls;

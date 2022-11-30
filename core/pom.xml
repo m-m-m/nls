@@ -18,6 +18,10 @@
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-base-placement</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
       <artifactId>mmm-l10n-all</artifactId>
       <scope>test</scope>
     </dependency>

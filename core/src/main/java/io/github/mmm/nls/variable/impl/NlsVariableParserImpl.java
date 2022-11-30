@@ -38,7 +38,7 @@ public class NlsVariableParserImpl implements NlsVariableParser {
     if (c == NlsVariableParserImpl.FORMAT_SEPARATOR) {
       formatType = scanner.readWhile(NO_COMMA_OR_END_EXPRESSION);
       index = scanner.getCurrentIndex();
-      c = scanner.forceNext();
+      c = scanner.next();
       if (c == NlsVariableParserImpl.FORMAT_SEPARATOR) {
         index = scanner.getCurrentIndex();
         try {
@@ -47,7 +47,7 @@ public class NlsVariableParserImpl implements NlsVariableParser {
           throw new IllegalArgumentException(
               "Failed to parse '" + scanner.substring(index, scanner.getCurrentIndex()) + "' as NlsFormatter.", e);
         }
-        c = scanner.forceNext();
+        c = scanner.next();
       } else {
         formatter = formatterManager.getFormatter(formatType);
       }
@@ -56,7 +56,7 @@ public class NlsVariableParserImpl implements NlsVariableParser {
     if (c == NlsVariableParserImpl.START_EXPRESSION) {
       String formatJustification = scanner.readUntil(NlsVariableParserImpl.END_EXPRESSION, false);
       justification = Justification.of(formatJustification);
-      c = scanner.forceNext();
+      c = scanner.next();
     }
     if (c != NlsVariableParserImpl.END_EXPRESSION) {
       throw new IllegalArgumentException(scanner.substring(index, scanner.getCurrentIndex()));
