@@ -82,14 +82,15 @@ public class NlsFormatterPluginChoice extends AbstractNlsFormatterPlugin {
     super();
     this.choices = new ArrayList<>();
     boolean hasElse = false;
-    char c = scanner.next();
+    char c = scanner.peek();
     while ((c == CONDITION_START) && (!hasElse)) {
+      scanner.next();
       Choice choice = parseChoice(scanner);
       if (choice.condition == FILTER_ELSE) {
         hasElse = true;
       }
       this.choices.add(choice);
-      c = scanner.next();
+      c = scanner.peek();
     }
     if (!hasElse) {
       throw new IllegalStateException("no (else) condition!");
@@ -97,7 +98,6 @@ public class NlsFormatterPluginChoice extends AbstractNlsFormatterPlugin {
     if (this.choices.size() < 2) {
       throw new IllegalStateException("only (else) condition!");
     }
-    scanner.stepBack();
   }
 
   /**
