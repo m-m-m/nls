@@ -38,10 +38,11 @@
  * We simply bundle the message in default language together with the separated dynamic arguments in one container
  * object that is called {@link io.github.mmm.nls.NlsMessage}. For exceptions there is additional support via
  * {@link io.github.mmm.base.exception.ApplicationException}. Here is an example to clarify the idea of
- * {@link io.github.mmm.nls.NlsMessage}: The i18n message is "Hi {name}! How are you?" and the dynamic argument is the
- * users name e.g. "Lilli". Now if we store this information together we have all we need. To get the localized message
- * we simply translate the i18n message to the proper language and then fill in the arguments. If we can NOT translate
- * we always have the message in default language which is "Hi Lilli! How are you?". <br>
+ * {@link io.github.mmm.nls.NlsMessage}:<br>
+ * The i18n message is "Hi {name}! How are you?" and the dynamic argument is the users name e.g. "Lilli". Now if we
+ * store this information together we have all we need. To get the localized message we simply translate the i18n
+ * message to the proper language and then fill in the arguments. If we can NOT translate we always have the message in
+ * default language which is "Hi Lilli! How are you?". <br>
  * But how do we translate the i18n message to other languages? The answer is quite easy:
  * <h4>NlsBundle</h4> The recommended approach is to create a final class derived from
  * {@link io.github.mmm.nls.NlsBundle}. For each message you define a method that takes the arguments to fill in and
@@ -92,15 +93,18 @@
  * For further details see {@link io.github.mmm.nls.NlsBundle}. <br>
  * <br>
  * For localization you can create property files with the translations of your NLS-bundle. E.g.
- * {@code foo/bar/NlsBundleExample_de.properties} with this content:
+ * {@code l10n/foo/bar/NlsBundleExample_de.properties} with this content:
  *
  * <pre>
  * messageSayHi = Hallo {name}! Wie geht es Dir?
  * errorLoginInUse = Es tut uns leid. Das Login "{login}" ist bereits vergeben. Bitte wählen Sie ein anderes Login.
  * </pre>
  *
- * Unlike the Java defaults, you will use named parameters instead of indexes what makes it much easier for localizers.
- * There are even more advanced features such as recursive translation of arguments and choice format type. See
+ * Please note that the path to the localized resource bundle needs to be prefixed with {@code l10n} (for localization)
+ * and must not be deployed as a java module dues to restrictions of the JPMS.<br>
+ * Unlike the Java defaults, you will use named parameters instead of indexes for parameter expressions in messages.
+ * This makes it much easier for localizers as they can understand the context of the parameter. There are even more
+ * advanced features such as recursive translation of arguments and choice format type. See
  * {@link io.github.mmm.nls.NlsMessage} for further details.
  *
  * In order to support you with creating and maintaining the localized properties, this solution also comes with the
