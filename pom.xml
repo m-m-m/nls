@@ -21,10 +21,8 @@
 
   <modules>
     <module>core</module>
-    <module>cli</module>
-    <module>sync</module>
   </modules>
-  
+
   <build>
     <plugins>
       <!-- Workaround for SUREFIRE-1897 -->
@@ -58,27 +56,10 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>mmm-cli-parent</artifactId>
-        <version>${project.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
       <!-- own modules -->
       <dependency>
         <groupId>${project.groupId}</groupId>
         <artifactId>mmm-nls</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>mmm-nls-cli</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>mmm-nls-sync</artifactId>
         <version>${project.version}</version>
       </dependency>
     </dependencies>
