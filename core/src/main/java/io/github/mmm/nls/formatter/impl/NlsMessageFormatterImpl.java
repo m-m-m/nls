@@ -8,11 +8,10 @@ import java.util.List;
 import java.util.Locale;
 
 import io.github.mmm.nls.argument.NlsArguments;
-import io.github.mmm.nls.formatter.NlsVariableFormatter;
 import io.github.mmm.nls.formatter.NlsMessageFormatter;
+import io.github.mmm.nls.formatter.NlsVariableFormatter;
 import io.github.mmm.nls.variable.NlsVariable;
 import io.github.mmm.nls.variable.NlsVariableParser;
-import io.github.mmm.scanner.CharScannerSyntaxBean;
 import io.github.mmm.scanner.CharSequenceScanner;
 
 /**
@@ -26,15 +25,6 @@ import io.github.mmm.scanner.CharSequenceScanner;
  * on {@link StringBuffer}. It also uses the same {@link Appendable} for recursive invocations.
  */
 public class NlsMessageFormatterImpl extends AbstractNlsFormatter<Void> implements NlsMessageFormatter {
-
-  /** The syntax of the message-format patterns. */
-  private static final CharScannerSyntaxBean SYNTAX = new CharScannerSyntaxBean();
-
-  static {
-    SYNTAX.setQuote('\'');
-    SYNTAX.setQuoteEscape('\'');
-    SYNTAX.setQuoteEscapeLazy(true);
-  }
 
   /** The parsed segments of the message pattern. */
   private final PatternSegment[] segments;
