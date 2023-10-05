@@ -133,7 +133,9 @@ module io.github.mmm.nls {
 
   requires transitive io.github.mmm.scanner;
 
-  requires static io.github.mmm.base.placement;
+  // https://issues.apache.org/jira/browse/SUREFIRE-1563
+  // requires static io.github.mmm.base.placement;
+  requires io.github.mmm.base.placement;
 
   requires org.slf4j;
 
