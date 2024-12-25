@@ -63,11 +63,11 @@ public class NlsFormatterPluginChoice extends AbstractNlsFormatterPlugin {
   /**
    * The {@link CharFilter} for the {@link CompareOperator#getSyntax() comparator symbol} .
    */
-  private static final CharFilter FILTER_COMPARATOR = new ListCharFilter('<', '=', '>', '!');
+  private static final CharFilter FILTER_COMPARATOR = new ListCharFilter("<=>!");
 
   /** The {@link CharFilter} for the comparator argument. */
   private static final CharFilter FILTER_COMPARATOR_ARGUMENT = CharFilter.LATIN_LETTER_OR_DIGIT
-      .compose(new ListCharFilter('-', '+', '.', ':'));
+      .compose(new ListCharFilter("-+.:"));
 
   /** The {@link Choice}s. */
   private final List<Choice> choices;
@@ -82,15 +82,15 @@ public class NlsFormatterPluginChoice extends AbstractNlsFormatterPlugin {
     super();
     this.choices = new ArrayList<>();
     boolean hasElse = false;
-    char c = scanner.peek();
-    while ((c == CONDITION_START) && (!hasElse)) {
+    int cp = scanner.peek();
+    while ((cp == CONDITION_START) && (!hasElse)) {
       scanner.next();
       Choice choice = parseChoice(scanner);
       if (choice.condition == FILTER_ELSE) {
         hasElse = true;
       }
       this.choices.add(choice);
-      c = scanner.peek();
+      cp = scanner.peek();
     }
     if (!hasElse) {
       throw new IllegalStateException("no (else) condition!");
@@ -112,18 +112,18 @@ public class NlsFormatterPluginChoice extends AbstractNlsFormatterPlugin {
     List<Segment> segments = new ArrayList<>();
     while (scanner.hasNext()) {
       int index = scanner.getCurrentIndex();
-      char c = scanner.peek();
+      int cp = scanner.peek();
       String literal = null;
-      if ((c == '"') || (c == '\'')) {
+      if ((cp == '"') || (cp == '\'')) {
         scanner.next();
-        literal = scanner.readUntil(c, false, c);
+        literal = scanner.readUntil(cp, false, cp);
         if (literal == null) {
           throw new IllegalArgumentException(scanner.substring(index, scanner.getCurrentIndex()));
         }
-        c = scanner.peek();
+        cp = scanner.peek();
       }
       NlsVariable variable = null;
-      if (c == NlsVariableParser.START_EXPRESSION) {
+      if (cp == NlsVariableParser.START_EXPRESSION) {
         scanner.next();
         variable = NlsVariableParser.get().parse(scanner);
       }
@@ -176,10 +176,10 @@ public class NlsFormatterPluginChoice extends AbstractNlsFormatterPlugin {
 
     int index = scanner.getCurrentIndex();
     Comparable<?> comparatorArgument;
-    char c = scanner.peek();
-    if ((c == '"') || (c == '\'')) {
+    int cp = scanner.peek();
+    if ((cp == '"') || (cp == '\'')) {
       scanner.next();
-      comparatorArgument = scanner.readUntil(c, false, c);
+      comparatorArgument = scanner.readUntil(cp, false, cp);
     } else {
       String argument = scanner.readWhile(FILTER_COMPARATOR_ARGUMENT);
       if (argument.length() == 0) {

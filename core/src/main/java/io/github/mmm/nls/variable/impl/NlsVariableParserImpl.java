@@ -20,26 +20,26 @@ public class NlsVariableParserImpl implements NlsVariableParser {
   public static final NlsVariableParserImpl INSTANCE = new NlsVariableParserImpl();
 
   /** A char filter that accepts everything except ',' and '}'. */
-  protected static final CharFilter NO_COMMA_OR_END_EXPRESSION = new ListCharFilter(FORMAT_SEPARATOR, END_EXPRESSION)
-      .negate();
+  protected static final CharFilter NO_COMMA_OR_END_EXPRESSION = new ListCharFilter(
+      "" + FORMAT_SEPARATOR + END_EXPRESSION).negate();
 
   /** A char filter that accepts everything except '{' and '}'. */
-  protected static final CharFilter NO_EXPRESSION = new ListCharFilter(START_EXPRESSION, END_EXPRESSION).negate();
+  protected static final CharFilter NO_EXPRESSION = new ListCharFilter("" + START_EXPRESSION + END_EXPRESSION).negate();
 
   @Override
   public NlsVariable parse(CharSequenceScanner scanner) {
 
     NlsFormatterManager formatterManager = NlsFormatterManager.get();
     String key = scanner.readWhile(CharFilter.IDENTIFIER);
-    char c = scanner.next();
+    int cp = scanner.next();
     int index = scanner.getCurrentIndex();
     String formatType = null;
     NlsFormatterPlugin formatter = null;
-    if (c == NlsVariableParserImpl.FORMAT_SEPARATOR) {
+    if (cp == NlsVariableParserImpl.FORMAT_SEPARATOR) {
       formatType = scanner.readWhile(NO_COMMA_OR_END_EXPRESSION);
       index = scanner.getCurrentIndex();
-      c = scanner.next();
-      if (c == NlsVariableParserImpl.FORMAT_SEPARATOR) {
+      cp = scanner.next();
+      if (cp == NlsVariableParserImpl.FORMAT_SEPARATOR) {
         index = scanner.getCurrentIndex();
         try {
           formatter = formatterManager.getFormatter(formatType, scanner);
@@ -47,18 +47,18 @@ public class NlsVariableParserImpl implements NlsVariableParser {
           throw new IllegalArgumentException(
               "Failed to parse '" + scanner.substring(index, scanner.getCurrentIndex()) + "' as NlsFormatter.", e);
         }
-        c = scanner.next();
+        cp = scanner.next();
       } else {
         formatter = formatterManager.getFormatter(formatType);
       }
     }
     Justification justification = null;
-    if (c == NlsVariableParserImpl.START_EXPRESSION) {
+    if (cp == NlsVariableParserImpl.START_EXPRESSION) {
       String formatJustification = scanner.readUntil(NlsVariableParserImpl.END_EXPRESSION, false);
       justification = Justification.of(formatJustification);
-      c = scanner.next();
+      cp = scanner.next();
     }
-    if (c != NlsVariableParserImpl.END_EXPRESSION) {
+    if (cp != NlsVariableParserImpl.END_EXPRESSION) {
       throw new IllegalArgumentException(scanner.substring(index, scanner.getCurrentIndex()));
     }
     if (formatter == null) {

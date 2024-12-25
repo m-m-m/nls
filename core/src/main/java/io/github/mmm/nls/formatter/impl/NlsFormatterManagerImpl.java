@@ -23,12 +23,12 @@ public class NlsFormatterManagerImpl implements NlsFormatterManager {
   public static final NlsFormatterManagerImpl INSTANCE = new NlsFormatterManagerImpl();
 
   /** A char filter that accepts everything except ',' and '}'. */
-  protected static final CharFilter NO_COMMA_OR_END_EXPRESSION = new ListCharFilter(NlsVariableParser.FORMAT_SEPARATOR,
-      NlsVariableParser.END_EXPRESSION).negate();
+  protected static final CharFilter NO_COMMA_OR_END_EXPRESSION = new ListCharFilter(
+      "" + NlsVariableParser.FORMAT_SEPARATOR + NlsVariableParser.END_EXPRESSION).negate();
 
   /** A char filter that accepts everything except ',' and '}'. */
-  protected static final CharFilter NO_EXPRESSION = new ListCharFilter(NlsVariableParser.START_EXPRESSION,
-      NlsVariableParser.END_EXPRESSION).negate();
+  protected static final CharFilter NO_EXPRESSION = new ListCharFilter(
+      "" + NlsVariableParser.START_EXPRESSION + NlsVariableParser.END_EXPRESSION).negate();
 
   private final NlsFormatterMap formatterMap;
 
