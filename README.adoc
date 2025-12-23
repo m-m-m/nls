@@ -6,7 +6,7 @@ image:https://github.com/m-m-m/nls/actions/workflows/build.yml/badge.svg["Build 
 = mmm-nls
 
 image:https://img.shields.io/maven-central/v/io.github.m-m-m/mmm-nls.svg?label=Maven%20Central["Maven Central",link=https://search.maven.org/search?q=g:io.github.m-m-m]
-image:https://javadoc.io/badge2/io.github.m-m-m/mmm-nls/javadoc.svg["base JavaDoc", link=https://javadoc.io/doc/io.github.m-m-m/mmm-nls]
+image:https://javadoc.io/badge2/io.github.m-m-m/mmm-nls/javadoc.svg["JavaDoc",link=https://javadoc.io/doc/io.github.m-m-m/mmm-nls]
 
 The module `io.github.mmm.nls` (artifactId `mmm-nls`) provides advanced native-language-support.
 For a motivation and introduction please read the JavaDocs (see badge above).
@@ -35,7 +35,7 @@ Module Dependency:
 = mmm-nls-cli
 
 image:https://img.shields.io/maven-central/v/io.github.m-m-m/mmm-nls-cli.svg?label=Maven%20Central["Maven Central",link=https://search.maven.org/search?q=g:io.github.m-m-m]
-image:https://javadoc.io/badge2/io.github.m-m-m/mmm-nls-cli/javadoc.svg["base JavaDoc", link=https://javadoc.io/doc/io.github.m-m-m/mmm-nls-cli]
+image:https://javadoc.io/badge2/io.github.m-m-m/mmm-nls-cli/javadoc.svg["JavaDoc",link=https://javadoc.io/doc/io.github.m-m-m/mmm-nls-cli]
 
 The module `io.github.mmm.nls.cli` (artifactId `mmm-nls-cli`) provides NLS for command-line-interfaces (CLI).
 For a motivation and introduction please read the JavaDocs (see badge above).
@@ -59,7 +59,7 @@ Module Dependency:
 = mmm-nls-sync
 
 image:https://img.shields.io/maven-central/v/io.github.m-m-m/mmm-nls-sync.svg?label=Maven%20Central["Maven Central",link=https://search.maven.org/search?q=g:io.github.m-m-m]
-image:https://javadoc.io/badge2/io.github.m-m-m/mmm-nls-sync/javadoc.svg["base JavaDoc", link=https://javadoc.io/doc/io.github.m-m-m/mmm-nls-sync]
+image:https://javadoc.io/badge2/io.github.m-m-m/mmm-nls-sync/javadoc.svg["JavaDoc",link=https://javadoc.io/doc/io.github.m-m-m/mmm-nls-sync]
 
 The module `io.github.mmm.nls.sync` (artifactId `mmm-nls-sync`) provides the tool `io.github.mmm.nls.sync.NlsSynchronizer` allowing to synchronize your `NlsBundle` classes with all your available resource-bundle properties files.
 For a motivation and introduction please read the JavaDocs (see badge above).
