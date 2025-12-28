@@ -14,12 +14,12 @@ import io.github.mmm.nls.argument.NlsArgumentsKeys;
  * Test of {@link NlsB} and {@link NlsMessageFactory}.
  */
 @SuppressWarnings("all")
-public class NlsBundleTest extends Assertions {
+class NlsBundleTest extends Assertions {
 
   static final String BUNDLE = "l10n.io.github.mmm.example.NlsBundleExample";
 
   @Test
-  public void testNlsBundleExample() {
+  void testNlsBundleExample() {
 
     NlsBundleExample bundle = NlsBundleExample.INSTANCE;
     assertThat(bundle.getBundleName()).isEqualTo(BUNDLE);

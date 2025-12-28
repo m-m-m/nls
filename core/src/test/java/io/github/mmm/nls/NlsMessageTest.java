@@ -30,7 +30,7 @@ import io.github.mmm.nls.formatter.NlsMessageFormatterFactory;
  * Test of {@link NlsMessage} and {@link NlsMessageFactory}.
  */
 @SuppressWarnings("all")
-public class NlsMessageTest extends Assertions implements NlsArgumentsKeys {
+class NlsMessageTest extends Assertions implements NlsArgumentsKeys {
 
   private static final char NON_BREAKING_SPACE = 0x000A0;
 
@@ -44,7 +44,7 @@ public class NlsMessageTest extends Assertions implements NlsArgumentsKeys {
    * This method tests the {@link net.sf.mmm.util.nls.api.NlsMessage} using a custom resolver.
    */
   @Test
-  public void testMessage() {
+  void testMessage() {
 
     String welcome = "Welcome ";
     String welcomeDe = "Willkommen ";
@@ -66,7 +66,7 @@ public class NlsMessageTest extends Assertions implements NlsArgumentsKeys {
   }
 
   @Test
-  public void testCascadedMessage() {
+  void testCascadedMessage() {
 
     NlsMessageFactory factory = NlsMessageFactory.get();
     NlsMessage msgInteger = factory.create(NlsBundleTest.BUNDLE, "msgInteger", "integer");
@@ -83,7 +83,7 @@ public class NlsMessageTest extends Assertions implements NlsArgumentsKeys {
   }
 
   @Test
-  public void testMessageWithEnumCompareOperator() {
+  void testMessageWithEnumCompareOperator() {
 
     // arrange
     CompareOperator cmp = CompareOperator.GREATER_OR_EQUAL;
@@ -97,7 +97,7 @@ public class NlsMessageTest extends Assertions implements NlsArgumentsKeys {
   }
 
   @Test
-  public void testMessageWithEnumAlignment() {
+  void testMessageWithEnumAlignment() {
 
     // arrange
     String text = "{alignment}";
@@ -123,7 +123,7 @@ public class NlsMessageTest extends Assertions implements NlsArgumentsKeys {
    * Tests {@link NlsFormatterManager#TYPE_DATETIME datetime format}.
    */
   @Test
-  public void testMessageWithDateTime() {
+  void testMessageWithDateTime() {
 
     OffsetDateTime offsetDateTime = OffsetDateTime.parse("1999-12-31T23:59:59+01:00");
     Date date = Date.from(offsetDateTime.toInstant());
@@ -145,7 +145,7 @@ public class NlsMessageTest extends Assertions implements NlsArgumentsKeys {
    * Tests {@link NlsFormatterManager#TYPE_DATETIME datetime format} with custom pattern.
    */
   @Test
-  public void testMessageWithDateTimeCustomPattern() {
+  void testMessageWithDateTimeCustomPattern() {
 
     OffsetDateTime offsetDateTime = OffsetDateTime.parse("1999-12-31T23:59:59+01:00");
     TimeZone systemTimeZone = TimeZone.getDefault();
@@ -157,7 +157,7 @@ public class NlsMessageTest extends Assertions implements NlsArgumentsKeys {
     TimeZone.setDefault(systemTimeZone);
   }
 
-  public void testMessageWithAllDateFormats() {
+  void testMessageWithAllDateFormats() {
 
     OffsetDateTime offsetDateTime = OffsetDateTime.parse("1999-12-31T23:59:59+01:00");
     Date date = Date.from(offsetDateTime.toInstant());
@@ -209,7 +209,7 @@ public class NlsMessageTest extends Assertions implements NlsArgumentsKeys {
    * Tests {@link NlsFormatterManager#TYPE_NUMBER number format}.
    */
   @Test
-  public void testMessageWithNumber() {
+  void testMessageWithNumber() {
 
     Number number = Double.valueOf(0.42);
     NlsMessage msg = NlsMessageFactory.get().create(NlsBundleTest.BUNDLE, "msgTestNumber",
@@ -226,7 +226,7 @@ public class NlsMessageTest extends Assertions implements NlsArgumentsKeys {
    * Tests {@link NlsFormatterManager#TYPE_CHOICE choice format}.
    */
   @Test
-  public void testMessageWithChoice() {
+  void testMessageWithChoice() {
 
     NlsMessage msg;
     String message;
@@ -313,7 +313,7 @@ public class NlsMessageTest extends Assertions implements NlsArgumentsKeys {
    */
   @Test
   @Disabled("https://github.com/konsoletyper/teavm/pull/467")
-  public void testMessageWithChoiceWithTemporal() {
+  void testMessageWithChoiceWithTemporal() {
 
     NlsMessage msg;
     String message;
@@ -337,7 +337,7 @@ public class NlsMessageTest extends Assertions implements NlsArgumentsKeys {
    * Tests {@link NlsMessage message} with {@link Justification}.
    */
   @Test
-  public void testMessageWithJustification() {
+  void testMessageWithJustification() {
 
     String key = "value";
     Integer value = Integer.valueOf(42);
@@ -364,7 +364,7 @@ public class NlsMessageTest extends Assertions implements NlsArgumentsKeys {
    * Tests {@link NlsFormatterManager#TYPE_TYPE type format}.
    */
   @Test
-  public void testMessageWithType() throws Exception {
+  void testMessageWithType() throws Exception {
 
     Method method = Generic.class.getMethod("get", new Class[0]);
     Type type = method.getGenericReturnType();
