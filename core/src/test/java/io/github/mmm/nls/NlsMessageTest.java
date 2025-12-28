@@ -85,13 +85,13 @@ public class NlsMessageTest extends Assertions implements NlsArgumentsKeys {
   @Test
   public void testMessageWithEnumCompareOperator() {
 
-    // given
+    // arrange
     CompareOperator cmp = CompareOperator.GREATER_OR_EQUAL;
     Integer value = Integer.valueOf(42);
     NlsMessage message = NlsMessageFactory.get().create(NlsBundleTest.BUNDLE, "errIllegalValue",
         "The value has to be {comparator} '{value}'!", NlsArguments.of("comparator", cmp, "value", value));
 
-    // when + then
+    // act + assert
     assertThat(message.getLocalizedMessage(Locale.ROOT)).isEqualTo("The value has to be greater or equal to '42'!");
     assertThat(message.getLocalizedMessage(Locale.GERMAN)).isEqualTo("Der Wert muss größer oder gleich '42' sein!");
   }
@@ -99,9 +99,9 @@ public class NlsMessageTest extends Assertions implements NlsArgumentsKeys {
   @Test
   public void testMessageWithEnumAlignment() {
 
-    // given
+    // arrange
     String text = "{alignment}";
-    // when + then
+    // act + assert
     assertThat(create(Alignment.CENTER).getLocalizedMessage(Locale.ENGLISH)).isEqualTo("centered");
     assertThat(create(Alignment.CENTER).getLocalizedMessage(Locale.GERMANY)).isEqualTo("zentriert");
     assertThat(create(Alignment.CENTER).getLocalizedMessage(Locale.FRANCE)).isEqualTo("centré");
